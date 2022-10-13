@@ -16,10 +16,11 @@ Coms* initComs ()
 void moreComs (Coms* c)                              //Doubles size of array of commands
 {
     c->sz<<= 1;                                             //Sets size to double the current 1
-    c->list= realloc (c->list, c->sz);                               //List of commands gets double the size
+    c->list= realloc (c->list, c->sz);                      //List of commands gets double the size
     while (c->pos!= c->sz)                          
     {
         c->list[c->pos]= malloc (5);                        //Sets memory to new refered strings
+        c->pos++;
     }   
     c->pos>>= 1;                                            //Resets var used for cycle
 }
@@ -35,13 +36,13 @@ void pushCom (char* str, Coms* c)
 void handle ()                                      //Function to handle input
 {
     char* in= malloc (BUFSIZ);
-    fgets (in, BUFSIZ, stdin);
-    char* i= in;
-    Coms* c= initComs (); 
-    while (i!= NULL)
+    fgets (in, BUFSIZ, stdin);                              //Gets input string
+    char* i= strtok (in, " \n");
+    Coms* c= initComs ();                                   //Command list
+    while (i!= NULL)                                        //Takes input string and breaks it down into single commands to insert in the list
     {
-        i= strtok (i, " ");
         pushCom (i, c);
+        i= strtok (NULL, " \n");
     }
 }
 
