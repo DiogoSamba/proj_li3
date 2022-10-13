@@ -33,8 +33,11 @@ void pushCom (char* str, Coms* c)
     c->pos++;                                       //Sets pos to next index of the list
 }
 
-char** initCompCom ()
+void execCom (char* com, DEQ* d)                    //Função auxiliar ao handle
 {
+    Node* n;
+    Type t;
+    void* data;
     char* a [10];
     for (int i= 0; i<10; i++)
     {
@@ -50,14 +53,6 @@ char** initCompCom ()
     a[7]= "rev";
     a[8]= "dest";
     a[9]= "prnt";
-    return a;
-}
-
-void execCom (char* com, DEQ* d, char* a [])                    //Função auxiliar ao handle
-{
-    Node* n;
-    Type t;
-    void* data;
     if (strcmp ( com, a[0])== 0)
         d= create();
     else if (strcmp ( com, a[1])== 0)
@@ -109,10 +104,6 @@ void execCom (char* com, DEQ* d, char* a [])                    //Função auxil
         printf ("Full DEQ:\n");
         printDEQ (d);
     }
-    for (int i= 0; i<10; i++)
-    {
-        free (a[i]);
-    }
 }
 
 void handle ()                                      //Function to handle input
@@ -130,7 +121,7 @@ void handle ()                                      //Function to handle input
     for (int i= 0; i< c->pos; i++)                          //Goes through every command in the list
     {
         printf ("Comando #%i, %s:\n", i, c->list[i]);
-        execCom (c->list[i], d, initCompCom ());                            //Executes the command at the i index of the array
+        execCom (c->list[i], d);                            //Executes the command at the i index of the array
     }
 }
 
