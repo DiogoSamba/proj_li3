@@ -37,16 +37,73 @@ void handle ()                                      //Function to handle input
 {
     char* in= malloc (BUFSIZ);
     fgets (in, BUFSIZ, stdin);                              //Gets input string
-    char* i= strtok (in, " \n");
+    char* s= strtok (in, " \n");
     Coms* c= initComs ();                                   //Command list
-    while (i!= NULL)                                        //Takes input string and breaks it down into single commands to insert in the list
+    while (s!= NULL)                                        //Takes input string and breaks it down into single commands to insert in the list
     {
-        pushCom (i, c);
-        i= strtok (NULL, " \n");
+        pushCom (s, c);
+        s= strtok (NULL, " \n");
+    }
+    DEQ* d;
+    for (int i= 0; i< c->sz; i++)                           //Interpreta cada comando da lista
+    {
+        Type t;
+        void* data;
+        Node* n;
+        printf ("Comando #%i, %s:\n", i, c->list[i]);
+        if (strcmp ( c->list[i], "c"))
+            d= create();
+        else if (strcmp ( c->list[i], "pus"))
+        {
+            printf ("What type of data do you intend to queue? (int, char, ...)\n");
+            //Apanhar o tipo de dados
+            //Interpretar dados segundo o tipo de dados
+            push (d, data, t);
+        }
+        else if (strcmp ( c->list[i], "pusf"))
+        {
+            printf ("What type of data do you intend to queue? (int, char, ...)\n");
+            //Apanhar o tipo de dados
+            printf ("Enter data:\n");
+            //Interpretar dados segundo o tipo de dados
+            pushFront (d, data, t);
+        }
+        else if (strcmp ( c->list[i], "pop"))
+        {
+            n= pop (d);
+            //Apanhar o tipo para escrever
+            printf ("Popped element of type \n");
+        }
+        else if (strcmp ( c->list[i], "popf"))
+        {
+            n= popFront (d);
+            //Apanhar o tipo para escrever
+            printf ("Popped element of type \n");
+        }
+        else if (strcmp ( c->list[i], "sz"))
+            printf ("%i", size(d));
+        else if (strcmp ( c->list[i], "ismt"))
+            if (isEmpty)
+                printf ("DEQ is Empty\n");
+            else
+                printf ("DEQ is not Empty\n");
+        else if (strcmp ( c->list[i], "rev"))
+        {
+            reverse (d);
+            printf ("DEQ has been reversed.\n");
+        }
+        else if (strcmp ( c->list[i], "dest"))
+        {    
+            destroy (d);
+            printf ("DEQ has been destroyed.\n");
+        }
+        else if (strcmp ( c->list[i], "prnt"))
+            printf ("Full DEQ:\n");
+            printDEQ (d);
     }
 }
 
-void printNode(Node* n)
+void printNode(Node* n)                                     //Prints a single Node
 {
     switch (n->t)
     {
@@ -68,7 +125,7 @@ void printNode(Node* n)
     }
 }
 
-void printDEQ(DEQ* DEQ, void(*printFunc)(void*))          // Prints Nodes ;
+void printDEQ(DEQ* DEQ)                                     // Prints full DEQ ;
 {
     Node* n= DEQ->bot;
     while (n->next!= 0)

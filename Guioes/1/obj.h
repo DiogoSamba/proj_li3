@@ -27,7 +27,7 @@ typedef struct deq                                  //Struct defining the DEQ it
 typedef struct commands                             //Struct to define an array of commands meant for input
 {
     char** list;                                    //Array of "strings" of size 5 to be interpreted
-    int sz;                                         //Size of array
+    int sz;                                         //Size of array of commands
     int pos;                                        //Posiition referenced for writing next command. Also used to check if list hits max size
 } Coms;
 
