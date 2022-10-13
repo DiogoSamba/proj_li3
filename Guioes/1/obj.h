@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-typedef enum type
+typedef enum type                                   //Enum of possible data types for elements in a node
 {
     Char,
     Short,
@@ -9,7 +9,7 @@ typedef enum type
     Float,
 } Type;
 
-typedef struct node
+typedef struct node                                 //Definition of single node structure
 {
     struct node* prev;
     void* data;
@@ -17,11 +17,19 @@ typedef struct node
     struct node* next;
 } Node;
 
-typedef struct deq
+typedef struct deq                                  //Struct defining the DEQ itself
 {
     Node* bot;
     Node* top;
 } DEQ;                                               //Double ended queue
+
+
+typedef struct commands                             //Struct to define an array of commands meant for input
+{
+    char** list;                                    //Array of "strings" of size 5 to be interpreted
+    int sz;                                         //Size of array
+    int pos;                                        //Posiition referenced for writing next command. Also used to check if list hits max size
+} Coms;
 
 DEQ* create();                                       // Initiallizing DEQ with no elements ;
 void push(DEQ* DEQ, void* data, Type t);             // adiciona data no fim da fila ;
@@ -31,5 +39,4 @@ void* popFront(DEQ* DEQ);                            // Removes the first node a
 int size(DEQ* DEQ);                                  // Size fo queue ;
 char isEmpty(DEQ* DEQ);                              // Checks if queue is empty; 1 for empty 0 for not empty ;
 void reverse(DEQ* DEQ);                              // Reverse queue ;
-void printDEQ(DEQ* DEQ, void(*printFunc)(void*));    // Prints Nodes ;
 void destroy(DEQ* DEQ);                              // Frees the memory associated with the DEQ ;

@@ -84,37 +84,6 @@ void reverse(DEQ* DEQ)                                  // Reverse queue;
     } 
 }
 
-void printNode(Node* n)
-{
-    switch (n->t)
-    {
-        case Char:
-            putchar (n->data); putchar ("\t");
-            return;
-        case Short:
-            printf ("%hi\t", n->data);
-            return;
-        case Int:
-            printf ("%i\t", n->data);
-            return;
-        case Long:
-            printf ("%ld\t", n->data);
-            return;
-        case Float:
-            printf ("%4f\t"), n->data;
-            return;
-    }
-}
-
-void printDEQ(DEQ* DEQ, void(*printFunc)(void*))          // Prints Nodes ;
-{
-    Node* n= DEQ->bot;
-    while (n->next!= 0)
-    {
-        printNode (n);
-    }
-}
-
 void destroy(DEQ* DEQ)                                    // Frees the memory associated with the DEQ ;
 {
     Node* n= DEQ->bot;
