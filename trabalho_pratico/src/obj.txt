@@ -1,4 +1,3 @@
-
 /*User
     username;name;gender;birth_date;account_creation;pay_method;account_status
     querrys
