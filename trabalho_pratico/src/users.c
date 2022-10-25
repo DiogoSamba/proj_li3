@@ -64,8 +64,9 @@ struct user_l* i_user_l ()                                                      
 
 struct name_tree* i_name_tree ()
 {
-    struct name_tree nt= malloc (sizeof (name_tree));
-
+    struct name_tree* nt= malloc (sizeof (name_tree));
+    nt->leter_list= malloc (10* sizeof (struct leter_l));
+    
 }
 
 /* void push_user (User u; gender_t g )
