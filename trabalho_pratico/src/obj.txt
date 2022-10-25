@@ -1,4 +1,3 @@
-
 /*User
     username;name;gender;birth_date;account_creation;pay_method;account_status
     querrys
@@ -18,7 +17,7 @@
 
 */
 
-/*
+/*Rides
     id;date;driver;user;city;distance;score_user;score_driver;tip;comment
     querrys
         cidade
