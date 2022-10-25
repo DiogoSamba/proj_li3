@@ -14,8 +14,7 @@
 //--------Structs
 
 
-
-typedef struct driver
+struct driver
 {
     int id;
     char* name;
@@ -26,7 +25,7 @@ typedef struct driver
     char city;
     int acc_creat[3];
     char acc_stat;
-}Driver;
+};
 
 struct adrv                                                                     //Struct q define o array
 {
