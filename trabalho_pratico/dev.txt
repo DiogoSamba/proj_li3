@@ -1,0 +1,13 @@
+Funcionamento do programa:
+
+    Fase 1- Formatar os dados dos ficheiros de input de maneira a integra-los na base de dados.
+    Fase 2- Receber comandos de consola e aplicar funções q respondam a esses comandos.
+
+Desenvolvimento do programa:
+
+    Fase 1- Definir bases de dados estruturadas de forma a responder às querrys propostas de forma rápida e relativamente eficiente em termos de memória.
+    Fase 2- Formatação dos ficheiros de input para as bases de dados.
+    Fase 3- Desenvolvimento de funções de interação com a base de dados.
+    Fase 4- Receber comandos e aplicar as funções anteriormente definidas para os responder. Respeitando a modularidade do programa e encapsulamento.
+    Fase 5- Makefile 
+    
