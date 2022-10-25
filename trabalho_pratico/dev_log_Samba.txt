@@ -2,4 +2,8 @@ Funções e structs para suportar o tipo driver.
 Estas funções permitem:
     A introdução do dados relativa a drivers.
     Pesquisa rápida por id de Driver.
-    Seleção rápida segundo o critério de género. 
+    Seleção rápida segundo o critério de género.
+
+Funções e structs para suportar o tipo user.
+Estas funções permitem:
+    

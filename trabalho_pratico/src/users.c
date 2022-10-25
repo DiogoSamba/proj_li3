@@ -12,7 +12,7 @@
 //--------Structs
 
 
-struct user
+typedef struct user
 {
     char* user_n;
     char* name;
@@ -21,14 +21,14 @@ struct user
     int acc_creat [3];
     char pay_meth;                                                              //0 Cash 1 CCard 2 DCard
     char acc_status;
-};
+}User ;
 
-struct user_l
+typedef struct user_l
 {
-    struct user* list;
+    User* list;
     int pos;
     int siz;
-};
+}User_l ;
 
 struct user_name_ref
 {
@@ -36,40 +36,58 @@ struct user_name_ref
     Driver* d_adr;
 };
 
-struct leter_l
+typedef struct leter_l
 {
     char leter;
     struct user_name_ref* unr;
     int sz;
     int pos;
-};
+}Letter_l;
 
-struct name_tree
+typedef struct name_tree
 {
-    struct leter_l* leter_list;
+    Letter_l* leter_list;
     int sz;
-    int pos;
-};
+}Name_T;
 
 //--------Functions
 
-struct user_l* i_user_l ()                                                      //Devolve array para guardar os users
+User_l* i_user_l ()                                                     //Devolve array para guardar os users
 {
-    struct user_l* l= malloc (sizeof (struct user_l));
-    l->list= malloc (100* sizeof (struct user));
+    User_l* l= malloc (sizeof (User_l));
+    l->list= malloc (100* sizeof (User));
     l->pos= 0;
-    l->siz= 0;
+    l->siz= 100;
     return l;
 }
 
-struct name_tree* i_name_tree ()
+Name_T* i_name_tree ()                                                  //Devolve uma name tree
 {
-    struct name_tree* nt= malloc (sizeof (name_tree));
-    nt->leter_list= malloc (10* sizeof (struct leter_l));
+    Name_T* t= malloc (sizeof (Name_T));
+    t->leter_list= malloc (10* sizeof (Letter_l));
+    t->sz= 10;
+    return t;
+}
+
+void push_n_l (Letter_l* l,char* name, int id)
+{
+    if (l->pos== l->sz)                                                  //Redimenciona o array se ultrapassar o tamanho definido
+        m_size_n_l(l);
     
 }
 
-/* void push_user (User u; gender_t g )
+void push_name (char* name, Name_T* t, int id)                           //Pushes a name into the name search truct and refers it's corresponding user
+{
+    Letter_l* l;
+    for (int i= 0; i< t->sz; i++)
+    {
+        if (t->leter_list[i].leter== name[0])                            //Finds the letter, refers it and leaves the cycle.
+            l= &t->leter_list[i]; i= t->sz;
+    }
+    push_n_l (l, name, id);                                                         //Pushes given name into list of elements of same starting letter 
+}
+
+/* void push_user (User u; gender_t g)
 {
 
 } */
