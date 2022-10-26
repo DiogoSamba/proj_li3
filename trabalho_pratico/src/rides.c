@@ -5,6 +5,5 @@
         preço
         gorjeta
         data ocurrencia
-
 */
 
