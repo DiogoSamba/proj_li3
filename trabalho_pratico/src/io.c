@@ -5,16 +5,17 @@ void q1 ()
     char id[30];
     scanf("%29s", id);
     int n;
+    /*
     Driver res;
     if (id[0] >= '0' && id[0] <= '9')
     {
         n = atoi(id);
         res = get_driver_id(a, n);
         print_driver(res);
-    }   
+    } */   
     
     
-    //printf("%s\n", id);
+    printf("%s\n", id);
 }
 
 
@@ -35,7 +36,7 @@ void In ()
         case '6' : q6(); return;
         case '7' : q7(); return;
         case '8' : q8(); return;
-        case '9' : q9(); return; */
+        case '9' : q9(); return;  */
         default: return;
     }
 }

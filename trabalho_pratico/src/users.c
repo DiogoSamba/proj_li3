@@ -71,9 +71,8 @@ Name_T* i_name_tree ()                                                  //Devolv
 
 void push_n_l (Letter_l* l,char* name, int id)
 {
-    if (l->pos== l->sz)                                                  //Redimenciona o array se ultrapassar o tamanho definido
-        m_size_n_l(l);
-    
+    /* if (l->pos== l->sz)                                                  //Redimenciona o array se ultrapassar o tamanho definido
+        m_size_n_l(l); */
 }
 
 void push_name (char* name, Name_T* t, int id)                           //Pushes a name into the name search truct and refers it's corresponding user
