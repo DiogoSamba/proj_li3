@@ -27,7 +27,7 @@ typedef struct user_l
 {
     User* list;
     int pos;
-    int siz;
+    int size;
 }User_l ;
 
 struct user_name_ref
@@ -40,14 +40,14 @@ typedef struct leter_l
 {
     char leter;
     struct user_name_ref* unr;
-    int sz;
+    int size;
     int pos;
 }Letter_l;
 
 typedef struct name_tree
 {
     Letter_l* leter_list;
-    int sz;
+    int size;
 }Name_T;
 
 //--------Functions
@@ -57,7 +57,7 @@ User_l* i_user_l ()                                                     //Devolv
     User_l* l= malloc (sizeof (User_l));
     l->list= malloc (100* sizeof (User));
     l->pos= 0;
-    l->siz= 100;
+    l->size= 100;
     return l;
 }
 
@@ -65,23 +65,29 @@ Name_T* i_name_tree ()                                                  //Devolv
 {
     Name_T* t= malloc (sizeof (Name_T));
     t->leter_list= malloc (10* sizeof (Letter_l));
-    t->sz= 10;
+    t->size= 10;
     return t;
+}
+
+void m_size_n_l (Letter_l* l)
+{
+    l->size<<= 1;
+    l->unr= realloc (l->unr, l->size);
 }
 
 void push_n_l (Letter_l* l,char* name, int id)
 {
-    /* if (l->pos== l->sz)                                                  //Redimenciona o array se ultrapassar o tamanho definido
+    /* if (l->pos== l->size)                                                  //Redimenciona o array se ultrapassar o tamanho definido
         m_size_n_l(l); */
 }
 
-void push_name (char* name, Name_T* t, int id)                           //Pushes a name into the name search truct and refers it's corresponding user
+void push_name (char* name, Name_T* t, int id)                           //Pushes a name into the name search struct and refers it's corresponding user
 {
     Letter_l* l;
-    for (int i= 0; i< t->sz; i++)
+    for (int i= 0; i< t->size; i++)
     {
         if (t->leter_list[i].leter== name[0])                            //Finds the letter, refers it and leaves the cycle.
-            l= &t->leter_list[i]; i= t->sz;
+            l= &t->leter_list[i]; i= t->size;
     }
     push_n_l (l, name, id);                                                         //Pushes given name into list of elements of same starting letter 
 }
