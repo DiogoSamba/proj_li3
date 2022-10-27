@@ -36,16 +36,16 @@ typedef struct user_l
     int size;
 }User_l ;
 
-struct user_name_ref
+typedef struct user_name_ref
 {
     char* name;
     int id;
-};
+}a_name_id;
 
 typedef struct letter_l
 {
     char letter;
-    struct user_name_ref* unr;
+    a_name_id* unr;
     int size;
     int pos;
 }Letter_l;
@@ -91,45 +91,56 @@ void push_a_user (User* u, array_user* a)                               //Pushes
 
 void m_size_n_l (Letter_l* l)                                           //Aux to push
 {
-    l->sz<<= 1;                                                         //Sets size of l to double
-    l->letter= realloc (l->letter, l->sz);                                //Reallocates into a cell double the prev size
+    l->size<<= 1;                                                           //Sets size of l to double
+    l->letter= realloc (l->letter, l->size);                                //Reallocates into a cell double the prev size
 }
 
 void push_n_l (Letter_l* l,char* name, int id)                          //Push into list of the given letter
 {
-    if (l->pos== l->sz)                                                 //Redimensiona o array se ultrapassar o tamanho definido
+    if (l->pos== l->size)                                                   //Redimensiona o array se ultrapassar o tamanho definido
         m_size_n_l(l);
-    l->unr->name= name;                                                 //Assignment of name field
-    l->unr->id= id;                                                  //Assignment of adr field
-    l->pos++;                                                           //Increments pos
+    l->unr->name= name;                                                     //Assignment of name field
+    l->unr->id= id;                                                         //Assignment of adr field
+    l->pos++;                                                               //Increments pos
 }
 
-void push_letter_name_t (Name_T* t, char* name)                         //FIXME
+void m_size_name_t (Name_T* t)                                          //Makes letter_list double the size
 {
-    /* if (t->pos== t->size)
-        //m_size_name_t (t);
-    t->letter_list[t->pos]=  */
-    
+    t->size<<= 1;
+    t->letter_list= realloc (t->letter_list, t->size);
 }
 
-void push_name (char* name, Name_T* t, int id)                           //Pushes a name into the name search struct and refers it's corresponding user
+a_name_id* i_unr_a ()
+{
+    a_name_id* a= malloc (sizeof);
+    return a
+}
+
+void push_letter_name_t (Name_T* t, char* name)                         //Creates branch for the given letter
+{
+    if (t->pos== t->size)
+        m_size_name_t (t);
+    t->letter_list[t->pos].letter= name[0];
+    t->letter_list[t->pos].unr= i_unr_a();
+}
+
+void push_name (char* name, Name_T* t, int id)                          //Pushes a name into the name search struct and refers it's corresponding user
 {
     Letter_l* l;
-    int bin= 0;
+    int bin= 1;
     for (int i= 0; i< t->size; i++)
     {
-        if (t->letter_list[i].letter== name[0])                            //Finds the letter, refers it and leaves the cycle.
-            l= &t->letter_list[i]; i= t->size; bin= 1;
+        if (t->letter_list[i].letter== name[0])                             //Finds the letter, refers it and leaves the cycle.
+            l= &t->letter_list[i]; i= t->size; bin= 0;
     }
     if (bin)
-        push_n_l (l, name, id);                                             //Pushes given name into list of elements of same starting letter 
-    /* else
-        Mete letra na NAME TREE e manda pah la essa merda */
+        push_letter_name_t (t, name);                                       //If a list with the same letter is not found, creates one. 
+    push_n_l (l, name, id);                                                 //Pushes given name into list of elements of same starting letter 
 }
 
 void push_user (User* u, gender_t g, array_user* a, Name_T* t, int id)  //Pushes User
 {   
-    push_a_user (u, a);                                                 //Pushes user struct into array_user
-    push_name (u->name, t, id);                                         //Pushes name into Name Tree
+    push_a_user (u, a);                                                     //Pushes user struct into array_user
+    push_name (u->name, t, id);                                             //Pushes name into Name Tree
 }
 
