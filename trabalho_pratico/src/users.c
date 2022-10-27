@@ -33,7 +33,7 @@ typedef struct user_l
 {
     User* list;
     int pos;
-    int siz;
+    int size;
 }User_l ;
 
 struct user_name_ref
@@ -46,7 +46,7 @@ typedef struct letter_l
 {
     char letter;
     struct user_name_ref* unr;
-    int sz;
+    int size;
     int pos;
 }Letter_l;
 
@@ -64,7 +64,7 @@ User_l* i_user_l ()                                                     //Devolv
     User_l* l= malloc (sizeof (User_l));
     l->list= malloc (100* sizeof (User));
     l->pos= 0;
-    l->siz= 100;
+    l->size= 100;
     return l;
 }
 
