@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#define SIZEARRAY 1024
 
 typedef struct adrv* arr_driver;                                                //Struct q define o tamanho do array
 typedef struct gen_t* gender_t; 

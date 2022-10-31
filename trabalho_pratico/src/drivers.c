@@ -1,5 +1,4 @@
 #include "drivers.h"
-#define SIZEARRAY 1024
 
 /*Driver
     id;name;birth_day;gender;car_class;license_plate;city;account_creation;account_status

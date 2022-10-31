@@ -8,7 +8,7 @@ int main ()
     gender_t genD = i_gender_t();
     FILE * f_drivers = fopen("drivers.csv", "r");
     char * line = NULL;
-    char 
+    //char 
     size_t len;
     getline(&line, &len, f_drivers);
     free(line);

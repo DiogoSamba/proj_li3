@@ -1,4 +1,5 @@
 #include "users.h"
+#define SMALL_A 10
 
 /*User
     username;name;gender;birth_date;account_creation;pay_method;account_status
@@ -45,7 +46,7 @@ typedef struct user_name_ref
 typedef struct letter_l
 {
     char letter;
-    a_name_id* unr;
+    a_name_id** unr;
     int size;
     int pos;
 }Letter_l;
@@ -76,6 +77,20 @@ Name_T* i_name_tree ()                                                  //Devolv
     return t;
 }
 
+array_user* i_array_user ()                                             //Creates array of users. Each user is given an id corresponding to its index in this array
+{
+    array_user* a= malloc (sizeof (array_user));
+    a->pos= 0;
+    a->size= SIZEARRAY;
+    a->array= malloc (SIZEARRAY* sizeof (User));
+}
+
+a_name_id* i_unr_a ()                                                   //Creates list of name-userID pairs
+{
+    a_name_id* a= malloc (sizeof (a_name_id));                            
+    return a;
+}
+
 void m_size_a_user (array_user* a)                                      //Sets given cell to double its prev size
 {
     a->size<<= 1;
@@ -95,12 +110,12 @@ void m_size_n_l (Letter_l* l)                                           //Aux to
     l->letter= realloc (l->letter, l->size);                                //Reallocates into a cell double the prev size
 }
 
-void push_n_l (Letter_l* l,char* name, int id)                          //Push into list of the given letter
+void push_n_l (Letter_l* l, char* name, int id)                         //Push into list of the given letter
 {
     if (l->pos== l->size)                                                   //Redimensiona o array se ultrapassar o tamanho definido
-        m_size_n_l(l);
-    l->unr->name= name;                                                     //Assignment of name field
-    l->unr->id= id;                                                         //Assignment of adr field
+        m_size_n_l (l);
+    l->unr[l->pos]->name= name;                                             //Assignment of name field
+    l->unr[l->pos]->id= id;                                                 //Assignment of id field
     l->pos++;                                                               //Increments pos
 }
 
@@ -110,32 +125,26 @@ void m_size_name_t (Name_T* t)                                          //Makes 
     t->letter_list= realloc (t->letter_list, t->size);
 }
 
-a_name_id* i_unr_a ()
-{
-    a_name_id* a= malloc (sizeof);
-    return a
-}
-
 void push_letter_name_t (Name_T* t, char* name)                         //Creates branch for the given letter
 {
     if (t->pos== t->size)
         m_size_name_t (t);
-    t->letter_list[t->pos].letter= name[0];
-    t->letter_list[t->pos].unr= i_unr_a();
+    t->letter_list[t->pos].letter= name[0];                                  //Sets the letter on the letter list to the first of the name (prob will be changed)
+    t->letter_list[t->pos].unr= i_unr_a ();                                  //Creates array of the given letter
 }
 
 void push_name (char* name, Name_T* t, int id)                          //Pushes a name into the name search struct and refers it's corresponding user
 {
-    Letter_l* l;
+    int n;
     int bin= 1;
     for (int i= 0; i< t->size; i++)
     {
         if (t->letter_list[i].letter== name[0])                             //Finds the letter, refers it and leaves the cycle.
-            l= &t->letter_list[i]; i= t->size; bin= 0;
+            n=i; i= t->size; bin= 0;                                        //n variable stores the index when the searched fore letter is found.
     }
     if (bin)
         push_letter_name_t (t, name);                                       //If a list with the same letter is not found, creates one. 
-    push_n_l (l, name, id);                                                 //Pushes given name into list of elements of same starting letter 
+    push_n_l (&t->letter_list[n], name, id);                                //Pushes given name into list of elements of same starting letter 
 }
 
 void push_user (User* u, gender_t g, array_user* a, Name_T* t, int id)  //Pushes User
