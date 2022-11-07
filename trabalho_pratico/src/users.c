@@ -30,13 +30,6 @@ typedef struct a_ussr
     int pos;
 }array_user;
 
-typedef struct user_l
-{
-    User* list;
-    int pos;
-    int size;
-}User_l ;
-
 typedef struct user_name_ref
 {
     char* name;
@@ -59,15 +52,6 @@ typedef struct name_tree
 }Name_T;
 
 //--------Functions
-
-User_l* i_user_l ()                                                     //Devolve array para guardar os users
-{
-    User_l* l= malloc (sizeof (User_l));
-    l->list= malloc (100* sizeof (User));
-    l->pos= 0;
-    l->size= 100;
-    return l;
-}
 
 Name_T* i_name_tree ()                                                  //Devolve uma name tree
 {
@@ -153,3 +137,17 @@ void push_user (User* u, gender_t g, array_user* a, Name_T* t, int id)  //Pushes
     push_name (u->name, t, id);                                             //Pushes name into Name Tree
 }
 
+int search_name_t (Name_T* t, char* name)
+{
+    for (int i= 0; i< t->size; i++)
+        if (t->letter_list[i].letter== *name)
+            for (int j= 0; j< t->size; j++)
+                if (!strcomp (t->letter_list[i].unr[j], name))
+                    return 
+
+}
+
+User get_user_name (array_user* a, Name_T* t, char* name)
+{
+    return a->array[search_name_t (t, name)];
+}

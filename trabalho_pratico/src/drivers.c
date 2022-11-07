@@ -37,7 +37,7 @@ struct arr_d_adr                                                                
 {
     int size;
     int pos;
-    Driver** array;
+    int* id;
 };
 
 struct gen_t                                                                    //Branch de género com array de endereços para elementos com determinado género
@@ -53,20 +53,20 @@ struct gen_t                                                                    
 void m_size_d_adr_arr (struct arr_d_adr* a)                                     //Duplica espaço no array de endereços de Drivers
 {
     a->size<<= 1;
-    a->array= realloc (a->array, a->size);
+    a->id= realloc (a->id, a->size);
 }
 
 void push_d_adr (struct arr_d_adr* a, Driver* d_adr)                             //Recebe um array de adr e um adr e guarda o adr no array
 {
     if (a->size== a->pos)
         m_size_d_adr_arr (a);
-    a->array [a->pos++]= d_adr;   
+    a->id [a->pos++]= d_adr;   
 }
 
 struct arr_d_adr* i_arr_d_adr ()                                                //Inicia um array de adr de drivers
 {
     struct arr_d_adr* a= malloc (sizeof (struct arr_d_adr));
-    a->array= malloc (SIZEARRAY* sizeof (Driver*));
+    a->id= malloc (SIZEARRAY* sizeof (int));
     a->size= SIZEARRAY;
     a->pos= 0;
     return a;
@@ -89,7 +89,7 @@ void m_size (arr_driver a)                                                      
 void push_gender (gender_t g, arr_driver a, int d_id)                           //Mete genero do driver no gender_t
 {
     if (a->array[a->pos].gender== 0)                                                //Driver is a male
-        push_d_adr (g->male, &a->array[a->pos]);
+        push_d_adr (g->male, a->array, id);
     else                                                                            //Driver is a female
         push_d_adr (g->female, &a->array[a->pos]);
 }
