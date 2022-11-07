@@ -2,7 +2,7 @@
 #include <stdio.h>
 //#include "io.h"
 #include "drivers.h"
-//#include "users.h"
+#include "users.h"
 //#include "rides.h"
 
 void set_database_driver (Array_Driver a_d)
