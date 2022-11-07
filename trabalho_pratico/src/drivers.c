@@ -11,7 +11,7 @@
 
 */
 
-//--------Structs
+//--------Structs--------
 
 struct adrv                                                                     //Struct q define o array
 {
@@ -27,28 +27,36 @@ struct arr_d_adr                                                                
     int* id;
 };
 
-/* struct gen_t                                                                    //Branch de género com array de endereços para elementos com determinado género
+struct gen_t                                                                    //Branch de género com array de endereços para elementos com determinado género
 {
     struct arr_d_adr* male;
     struct arr_d_adr* female;
-}; */
+};
 
-//--------Functions
+//--------Functions--------
 
-
+//--------Gender Functions
 
 void m_size_d_adr_arr (struct arr_d_adr* a)                                     //Duplica espaço no array de endereços de Drivers
 {
     a->size<<= 1;
     a->id= realloc (a->id, a->size);
 }
-/* 
-void push_d_adr (struct arr_d_adr* a, Driver* d_adr, int id)                             //Recebe um array de adr e um adr e guarda o adr no array
+
+void push_d_adr (struct arr_d_adr* a, Driver* d_adr, int id)                    //Recebe um array de adr e um adr e guarda o adr no array
 {
     if (a->size== a->pos)
         m_size_d_adr_arr (a);
     a->id [a->pos++]= id;   
-} */
+}
+
+void push_gender (gender_t g, arr_driver a, int d_id)                           //Mete genero do driver no gender_t
+{
+    if (a->array[a->pos].gender== 0)                                                //Driver is a male
+        push_d_adr (g->male, a->array, d_id);
+    else                                                                            //Driver is a female
+        push_d_adr (g->female, &a->array[a->pos], d_id);
+}
 
 struct arr_d_adr* i_arr_d_adr ()                                                //Inicia um array de adr de drivers
 {
@@ -59,13 +67,7 @@ struct arr_d_adr* i_arr_d_adr ()                                                
     return a;
 }
 
-/* gender_t i_gender_t ()                                                          //Devolve Estrutura de ref com criterio gender
-{
-    gender_t g= malloc (sizeof (gender_t));
-    g->female= i_arr_d_adr ();
-    g->male= i_arr_d_adr ();
-    return g;
-} */
+//---------Driver's Array Funtctions
 
 void m_size (arr_driver a)                                                      //Aumenta size do array
 {
@@ -73,13 +75,24 @@ void m_size (arr_driver a)                                                      
     a->array= realloc (a->array, a->size);
 }
 
-/* void push_gender (gender_t g, arr_driver a, int d_id)                           //Mete genero do driver no gender_t
+void push_driver (arr_driver a,/*  gender_t* t, */ Driver d, int d_id)                 //Adiciona elemento d ao array e às restantes estruturas de dados
 {
-    if (a->array[a->pos].gender== 0)                                                //Driver is a male
-        push_d_adr (g->male, a->array, d_id);
-    else                                                                            //Driver is a female
-        push_d_adr (g->female, &a->array[a->pos], d_id);
-} */
+    static int id;
+    if (a->pos== a->size)
+        m_size (a);                                                                 //Aumenta tamanho do array se chegar ao fim
+    a->array[a->pos++]= d;                                                          //Atribui Driver em pos e incrementa a posição
+    //push_gender (g, a, d_id);                                                       //Atribui Ref de Driver na gender_t
+}
+
+//--------Funções Interface
+
+gender_t i_gender_t ()                                                          //Devolve Estrutura de ref com criterio gender
+{
+    gender_t g= malloc (sizeof (gender_t));
+    g->female= i_arr_d_adr ();
+    g->male= i_arr_d_adr ();
+    return g;
+}
 
 arr_driver i_driver_l ()                                                        //Inicia o array de drivers com tamanho 1024
 {
@@ -88,15 +101,6 @@ arr_driver i_driver_l ()                                                        
     r->pos= 0;
     r->array= malloc (SIZEARRAY* sizeof (Driver));
     return r;
-}
-
-void push_driver (arr_driver a,/*era o gender,*/ Driver d, int d_id)                 //Adiciona elemento d ao array e às restantes estruturas de dados
-{
-    static int id;
-    if (a->pos== a->size)
-        m_size (a);                                                                 //Aumenta tamanho do array se chegar ao fim
-    a->array[a->pos++]= d;                                                          //Atribui Driver em pos e incrementa a posição
-    //push_gender (g, a, d_id);                                                       //Atribui Ref de Driver na gender_t
 }
 
 Driver get_driver_id (arr_driver a, int n)                                         //Devolve Driver com id n

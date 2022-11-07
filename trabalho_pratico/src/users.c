@@ -1,5 +1,6 @@
 #include "users.h"
 #define SMALL_A 10
+#define SIZEARRAY 1000
 
 /*User
     username;name;gender;birth_date;account_creation;pay_method;account_status
@@ -51,7 +52,9 @@ typedef struct name_tree
     int pos;
 }Name_T;
 
-//--------Functions
+//--------Functions--------
+
+//--------Name Tree Functions
 
 Name_T* i_name_tree ()                                                  //Devolve uma name tree
 {
@@ -61,32 +64,6 @@ Name_T* i_name_tree ()                                                  //Devolv
     return t;
 }
 
-array_user* i_array_user ()                                             //Creates array of users. Each user is given an id corresponding to its index in this array
-{
-    array_user* a= malloc (sizeof (array_user));
-    a->pos= 0;
-    a->size= SIZEARRAY;
-    a->array= malloc (SIZEARRAY* sizeof (User));
-}
-
-a_name_id* i_unr_a ()                                                   //Creates list of name-userID pairs
-{
-    a_name_id* a= malloc (sizeof (a_name_id));                            
-    return a;
-}
-
-void m_size_a_user (array_user* a)                                      //Sets given cell to double its prev size
-{
-    a->size<<= 1;
-    a->array= realloc(a->array, a->size);
-}
-
-void push_a_user (User* u, array_user* a)                               //Pushes given element into given array
-{
-    if (a->size== a->pos)
-        m_size_a_user (a);
-    a->array[a->pos]= *u;
-}
 
 void m_size_n_l (Letter_l* l)                                           //Aux to push
 {
@@ -109,12 +86,21 @@ void m_size_name_t (Name_T* t)                                          //Makes 
     t->letter_list= realloc (t->letter_list, t->size);
 }
 
+a_name_id* i_unr_a ()                                                   //Creates list of Name-ID pairs
+{
+    a_name_id* a= malloc (SIZEARRAY * sizeof (a_name_id));                            
+    return a;
+}
+
 void push_letter_name_t (Name_T* t, char* name)                         //Creates branch for the given letter
 {
     if (t->pos== t->size)
         m_size_name_t (t);
-    t->letter_list[t->pos].letter= name[0];                                  //Sets the letter on the letter list to the first of the name (prob will be changed)
-    t->letter_list[t->pos].unr= i_unr_a ();                                  //Creates array of the given letter
+    t->letter_list[t->pos].letter= name[0];                                 //Sets the letter on the letter list to the first of the name (prob will be changed)
+    t->letter_list[t->pos].unr= i_unr_a ();                                 //Creates array of the given letter
+    t->letter_list[t->pos].size= SIZEARRAY;                                 //Sets size of the "unr" array to it's alocated size
+    t->letter_list[t->pos].pos= 0;                                          //Sets array position to 0;
+    t->pos++;                                                               //Increments position
 }
 
 void push_name (char* name, Name_T* t, int id)                          //Pushes a name into the name search struct and refers it's corresponding user
@@ -124,12 +110,39 @@ void push_name (char* name, Name_T* t, int id)                          //Pushes
     for (int i= 0; i< t->size; i++)
     {
         if (t->letter_list[i].letter== name[0])                             //Finds the letter, refers it and leaves the cycle.
-            n=i; i= t->size; bin= 0;                                        //n variable stores the index when the searched fore letter is found.
+            n=i; i= t->size; bin= 0;                                        //n variable stores the index when the searched for letter is found.
     }
     if (bin)
         push_letter_name_t (t, name);                                       //If a list with the same letter is not found, creates one. 
     push_n_l (&t->letter_list[n], name, id);                                //Pushes given name into list of elements of same starting letter 
 }
+
+//--------Array of Users Functions 
+
+array_user* i_array_user ()                                             //Creates array of users. Each user is given an id corresponding to its index in this array
+{
+    array_user* a= malloc (sizeof (array_user));
+    a->pos= 0;
+    a->size= SIZEARRAY;
+    a->array= malloc (SIZEARRAY* sizeof (User));
+}
+
+void m_size_a_user (array_user* a)                                      //Sets given cell to double its prev size
+{
+    a->size<<= 1;
+    a->array= realloc(a->array, a->size);
+}
+
+
+void push_a_user (User* u, array_user* a)                               //Pushes given element into given array
+{
+    if (a->size== a->pos)
+        m_size_a_user (a);
+    a->array[a->pos++]= *u;
+}
+
+//--------Name-ID Pairs
+
 
 void push_user (User* u, gender_t g, array_user* a, Name_T* t, int id)  //Pushes User
 {   
@@ -142,9 +155,8 @@ int search_name_t (Name_T* t, char* name)
     for (int i= 0; i< t->size; i++)
         if (t->letter_list[i].letter== *name)
             for (int j= 0; j< t->size; j++)
-                if (!strcomp (t->letter_list[i].unr[j], name))
-                    return 
-
+                if (!strcomp (t->letter_list[i].unr[j]->name, name))
+                    return t->letter_list[i].unr[j]->id;
 }
 
 User get_user_name (array_user* a, Name_T* t, char* name)
