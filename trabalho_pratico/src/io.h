@@ -1,8 +1,7 @@
-#ifndef __io_h
-#define __io_h
+#ifndef IO
+#define IO
 #include <stdio.h>
-#include "users.h"
 
 
-void In ();
+void In ();                                                                     //Handles Input
 #endif

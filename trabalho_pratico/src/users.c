@@ -13,17 +13,6 @@
 
 //--------Structs
 
-typedef struct user
-{
-    char* user_n;
-    char* name;
-    char gender;
-    int birth_date [3];
-    int acc_creat [3];
-    char pay_meth;                                                              //0 Cash 1 CCard 2 DCard
-    char acc_status;
-}User ;
-
 typedef struct a_ussr
 {
     User* array;
@@ -43,14 +32,14 @@ typedef struct letter_l
     a_name_id** unr;
     int size;
     int pos;
-}Letter_l;
+}letter_l;
 
 typedef struct name_tree
 {
-    Letter_l* letter_list;
+    letter_l* letter_list;
     int size;
     int pos;
-}Name_T;
+}name_T;
 
 //--------Functions--------
 
@@ -144,7 +133,7 @@ void push_a_user (User* u, array_user* a)                               //Pushes
 //--------Name-ID Pairs
 
 
-void push_user (User* u, gender_t g, array_user* a, Name_T* t, int id)  //Pushes User
+void push_user (User* u/* , gender_t g */, array_user* a, Name_T* t, int id)  //Pushes User
 {   
     push_a_user (u, a);                                                     //Pushes user struct into array_user
     push_name (u->name, t, id);                                             //Pushes name into Name Tree

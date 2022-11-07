@@ -1,3 +1,4 @@
-#ifndef __rides_h
-#define __rides_h
+#ifndef RIDES
+#define RIDES
+
 #endif
