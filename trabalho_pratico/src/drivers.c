@@ -56,11 +56,11 @@ void m_size_d_adr_arr (struct arr_d_adr* a)                                     
     a->id= realloc (a->id, a->size);
 }
 
-void push_d_adr (struct arr_d_adr* a, Driver* d_adr)                             //Recebe um array de adr e um adr e guarda o adr no array
+void push_d_adr (struct arr_d_adr* a, Driver* d_adr, int id)                             //Recebe um array de adr e um adr e guarda o adr no array
 {
     if (a->size== a->pos)
         m_size_d_adr_arr (a);
-    a->id [a->pos++]= d_adr;   
+    a->id [a->pos++]= id;   
 }
 
 struct arr_d_adr* i_arr_d_adr ()                                                //Inicia um array de adr de drivers
@@ -89,9 +89,9 @@ void m_size (arr_driver a)                                                      
 void push_gender (gender_t g, arr_driver a, int d_id)                           //Mete genero do driver no gender_t
 {
     if (a->array[a->pos].gender== 0)                                                //Driver is a male
-        push_d_adr (g->male, a->array, id);
+        push_d_adr (g->male, a->array, d_id);
     else                                                                            //Driver is a female
-        push_d_adr (g->female, &a->array[a->pos]);
+        push_d_adr (g->female, a->array, d_id);
 }
 
 arr_driver i_driver_l ()                                                        //Inicia o array de drivers com tamanho 1024
