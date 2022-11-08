@@ -2,6 +2,8 @@
 #define DRIVERS
 #include <stdlib.h>
 
+//--------Structs--------
+
 typedef struct driver
 {
     int id;
@@ -16,7 +18,9 @@ typedef struct driver
 }Driver;
 typedef struct adrv* Array_Driver;
 
+//--------Functions--------
+
 Array_Driver init_Array_Driver ();                                                                  //Returns the address to a driver array type of variable
 Driver get_driver_id (Array_Driver a, int id);                                                      //Input the driver's array and the drivers id, returns the driver
-void push_driver_Array_Driver (Array_Driver a, Driver d);                                             //Push a given Driver element into the driver's array
+void push_driver_Array_Driver (Array_Driver a, Driver d);                                           //Push a given Driver element into the driver's array
 #endif

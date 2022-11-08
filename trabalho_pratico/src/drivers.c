@@ -41,10 +41,10 @@ array_driver* init_Array_Driver ()                                              
     return a;
 }
 
-    Driver get_driver_id (array_driver* a, int id)                              //Input the driver's array and the drivers id, returns the driver
-    {
-        return a->array[id];
-    }
+Driver get_driver_id (array_driver* a, int id)                              //Input the driver's array and the drivers id, returns the driver
+{
+    return a->array[id];
+}
 
 void push_driver_Array_Driver (array_driver* a, Driver d)                       //Push a given Driver element into the driver's array
 {
