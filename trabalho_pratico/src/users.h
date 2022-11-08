@@ -17,4 +17,5 @@ typedef struct name_tree* Name_Tree;
 
 Name_Tree init_name_tree ();                                                    //Returns a Name Tree
 Array_User init_array_user ();                                                  //Returns a User Array
+void push_user (User u, Array_User a, Name_Tree t);                             //Pushes a User into the data structure
 #endif
