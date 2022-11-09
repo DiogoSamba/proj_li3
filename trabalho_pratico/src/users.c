@@ -1,6 +1,6 @@
 #include "users.h"
 #include <string.h>
-#define SMALL_A 10
+#define SMALL_A 20
 #define SIZEARRAY 1000
 #define SIZEARRAYNODE 4
 /*User
@@ -45,7 +45,7 @@ typedef struct array_user
 static void more_array_user (array_user* a)                                     //Doubles the size of Array_User
 {
     a->size<<= 1;
-    a->user_array= realloc (a->user_array, a->size);
+    a->user_array= realloc (a->user_array, a->size* sizeof (User));
 }
 
 static void push_array_user (array_user* a, User u)                             //Pushes User into Array_User
@@ -116,8 +116,8 @@ array_user* init_array_user ()                                                  
     return a;
 }
 
-void push_user (User u, array_user* a_u, node_array* n_a, int id)                                 //Pushes a User into the data structure
+void push_user (User u, array_user* a_u, node_array* n_a)               //Pushes a User into the data structure
 {
-    push_array_user (a_u, u);                                                                   //Pushes user into the user_array thus matching the user with it's array index
-    push_node_array (n_a, u.user_n, id, 0);                                                     //Combined function call to match a user_name with the user id (index in the user_array)
+    push_array_user (a_u, u);                                                       //Pushes user into the user_array thus matching the user with it's array index
+    push_node_array (n_a, u.user_n, a_u->pos-1, 0);                                         //Combined function call to match a user_name with the user id (index in the user_array)
 }

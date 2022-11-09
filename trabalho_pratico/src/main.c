@@ -55,7 +55,7 @@ void set_database_user (Array_User a_u)
     FILE * f_drivers = fopen ("../Dataset/users.csv", "r");
     char * lino = NULL;
     int id = 1, c;
-    Name_Tree name_t = init_name_tree ();
+    Node_Array n_a =init_node_array ();
     User d;
     size_t len;
     getline (&lino, &len, f_drivers);
@@ -70,7 +70,7 @@ void set_database_user (Array_User a_u)
         sscanf (lino, "%[^;];%[^;];%c;%d/%d/%d;%d/%d/%d;%2s%[^;];%c", d.user_n, d.name, &d.gender, &d.birth_date[0], &d.birth_date[1], &d.birth_date[2],
         &d.acc_creat[0], &d.acc_creat[1], &d.acc_creat[2], determinar, lino, &d.acc_status);
         determinar_pay_meth (determinar[1], &d);
-        push_user(d, a_u, name_t);
+        push_user(d, a_u, n_a);
     }
 }
 
