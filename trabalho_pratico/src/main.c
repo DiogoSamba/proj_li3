@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stdio.h>
-//#include "io.h"
+#include "io.h"
 #include "drivers.h"
 #include "users.h"
 //#include "rides.h"
@@ -51,15 +51,15 @@ void determinar_pay_meth (char pay_meth, User * u)
 
 void set_database_user (Array_User a_u)      
 {
-    FILE * f_drivers = fopen ("../Dataset/users.csv", "r");
+    FILE * f_users = fopen ("../Dataset/users.csv", "r");
     char * lino = NULL;
     Name_Tree name_t = init_name_tree ();
     User d;
     size_t len;
-    getline (&lino, &len, f_drivers);
+    getline (&lino, &len, f_users);
     free (lino);
     lino = NULL;
-    while (getline (&lino, &len, f_drivers) != -1)
+    while (getline (&lino, &len, f_users) != -1)
     {
         d.name = calloc (1,30);
         d.user_n = calloc (1,30);
@@ -76,9 +76,7 @@ int main ()
     Array_Driver a_d = init_Array_Driver ();
     Array_User a_u = init_array_user ();
     set_database_driver (a_d);
-    set_database_user (a_u);
-    printf ("ola");
-    Driver manuel = get_driver_id(a_d, 9998);
-    printf ("ola");
+    //set_database_user (a_u);
+    In(a_d);
 }
 

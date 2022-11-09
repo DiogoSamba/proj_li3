@@ -1,6 +1,7 @@
 #ifndef DRIVERS
 #define DRIVERS
 #include <stdlib.h>
+#include "defines.h"
 
 //--------Structs--------
 
