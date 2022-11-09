@@ -1,7 +1,5 @@
 #include "users.h"
-#define SMALL_A 10
-#define SIZEARRAY 1000
-#define SIZEARRAYNODE 4
+#include <string.h>
 #define SMALL_A 10
 #define SIZEARRAY 1000
 #define SIZEARRAYNODE 4
@@ -14,7 +12,6 @@
         data cri
 */
 
-//--------Structs--------
 //--------Structs--------
 
 typedef struct node 
@@ -65,15 +62,16 @@ static void more_node_nt (name_tree* t)
 {
     t->size<<= 1;
     t->array_node= realloc (t->array_node, t->size);
+    memset ((void*)&t->array_node[t->pos], 0, (t->size>>1)* sizeof (node));
 }
 
-static void new_node_nt (name_tree* t, char* name)
+static void new_node_nt (name_tree* t, char* name, int id)
 {
     if (t->pos== t->size)
         more_node_nt (t);
     node* n= &t->array_node[t->pos++];
-    n->array_node= NULL;
-    n->name= NULL;
+    n->name= name;
+    n->id= id;
 }
 
 static void init_array_node (node* n)
@@ -87,10 +85,7 @@ static void more_node_node_array (node* n)                                      
 {
     n->size<<= 1;
     n->array_node= realloc (n->array_node, n->size);
-    for (void* i= &n->array_node[n->pos]; i< (void*) &n->array_node[n->size]; i++)  //Set the realloc unused cells to zeros
-    {
-        i= NULL;
-    }
+    memset (&n->array_node[n->pos], 0, (n->size>>1)* sizeof(node));
 }
 
 static void new_node_node_array (node* n, char* name, int id)                   //Adds a new node to the node array
@@ -133,7 +128,7 @@ static void push_name_tree (name_tree* t, char* name, int id)                   
     for (; i< t->size && !bin; i++) if (t->array_node[i].name[0]== name[0]) bin= 1; //Finds the corresponing node of level 0 in the Name_Tree
     if (!bin)                                                                       //If nothing was found gets a new node with name's first letter
     {
-        new_node_nt (t, name);
+        new_node_nt (t, name, id);
     }
     n= &t->array_node[i];                                                           //Node with the corresponding first letter 
     push_name_node (n, 0, name, id);
