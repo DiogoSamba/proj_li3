@@ -1,8 +1,26 @@
-typedef struct adrv* arr_driver;                                                //Struct q define o tamanho do array
-typedef struct gen_t* gender_t; 
-typedef struct driver Driver;
+#ifndef DRIVERS
+#define DRIVERS
+#include <stdlib.h>
 
-arr_driver i_driver_l ();                                                       //Devolve um array de elementos do tipo driver
-void push_driver (arr_driver a, gender_t g, Driver d, int d_id);                //Adiciona elemento d ao array e às restantes estruturas de dados
-Driver get_driver_id (arr_driver a, int n);                                     //Devolve Driver com id n
-gender_t i_gender_t ();                                                         //Devolve Estrutura de ref com criterio gender
+//--------Structs--------
+
+typedef struct driver
+{
+    int id;
+    char* name;
+    int birth_date[3];
+    char gender;                                                                //0 Male 1 Female
+    char class;
+    char license_plate[7];
+    char city;
+    int acc_creat[3];
+    char acc_stat;
+}Driver;
+typedef struct adrv* Array_Driver;
+
+//--------Functions--------
+
+Array_Driver init_Array_Driver ();                                                                  //Returns the address to a driver array type of variable
+Driver get_driver_id (Array_Driver a, int id);                                                      //Input the driver's array and the drivers id, returns the driver
+void push_driver_Array_Driver (Array_Driver a, Driver d);                                           //Push a given Driver element into the driver's array
+#endif
