@@ -126,7 +126,7 @@ static void push_name_tree (name_tree* t, char* name, int id)                   
 {
     int bin= 0, i= 0;
     node* n;
-    for (; i< t->size && !bin; i++) if (t->array_node[i].name== name) bin= 1;       //Finds the corresponing node of level 0 in the Name_Tree
+    for (; i< t->size && !bin; i++) if (t->array_node[i].name[0]== name[0]) bin= 1; //Finds the corresponing node of level 0 in the Name_Tree
     if (!bin)                                                                       //If nothing was found gets a new node with name's first letter
     {
         new_node_nt (t, name);
