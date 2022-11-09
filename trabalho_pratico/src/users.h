@@ -12,8 +12,10 @@ typedef struct user
     char pay_meth;                                                                  //0 Cash 1 CCard 2 DCard
     char acc_status;
 }User;
+
+
 typedef struct array_user* Array_User;
-typedef struct name_tree* Name_Tree;
+typedef struct node_tree* Node_Tree;
 
 Name_Tree init_name_tree ();                                                    //Returns a Name Tree
 Array_User init_array_user ();                                                  //Returns a User Array
