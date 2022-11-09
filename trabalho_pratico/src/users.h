@@ -13,11 +13,10 @@ typedef struct user
     char acc_status;
 }User;
 
-
 typedef struct array_user* Array_User;
-typedef struct node_tree* Node_Tree;
+typedef struct node_array* Node_Array;
 
-Name_Tree init_name_tree ();                                                    //Returns a Name Tree
+Node_Array init_node_array ();                                                  //Returns a Node Array
 Array_User init_array_user ();                                                  //Returns a User Array
-void push_user (User u, Array_User a, Name_Tree t);                             //Pushes a User into the data structure
+void push_user (User u, Array_User a_u, Node_Array n_a, int id);                //Pushes a User into the data structure
 #endif
