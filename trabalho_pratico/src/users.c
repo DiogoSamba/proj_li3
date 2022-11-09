@@ -2,6 +2,9 @@
 #define SMALL_A 10
 #define SIZEARRAY 1000
 #define SIZEARRAYNODE 4
+#define SMALL_A 10
+#define SIZEARRAY 1000
+#define SIZEARRAYNODE 4
 /*User
     username;name;gender;birth_date;account_creation;pay_method;account_status
     querrys
@@ -11,6 +14,7 @@
         data cri
 */
 
+//--------Structs--------
 //--------Structs--------
 
 typedef struct node 
