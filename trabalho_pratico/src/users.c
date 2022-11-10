@@ -1,6 +1,6 @@
 #include "users.h"
 #include <string.h>
-#define SMALL_A 20
+#define SMALL_A 2
 #define SIZEARRAY 1000
 #define SIZEARRAYNODE 4
 /*User
@@ -61,6 +61,12 @@ static void more_node_array (node_array* a)                                     
 {
     a->size<<= 1;
     a->array= realloc (a->array, a->size* sizeof (node));
+    node* n= &a->array[a->size>> 1];
+    for (int i= 0; i< a->size>> 1; i++)                                         //Set the nodes allocated by realloc to NULL (id doesn't matter)
+    {
+        n[i].a= NULL;
+        n[i].name= NULL;
+    }
 }
 
 static void push_node_array (node_array* a, char* name, int id, int l);
