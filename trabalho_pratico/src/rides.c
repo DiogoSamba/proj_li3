@@ -54,7 +54,7 @@ typedef struct array_ride
 static void more_array_ride (array_ride* a)                                     //Doubes the size of the Ride's Array
 {
     a->size<<= 1;
-    a->array= realloc (a->size* sizeof (Ride));
+    a->array= realloc (a->array, a->size* sizeof (Ride));
 }
 
 //--------API
