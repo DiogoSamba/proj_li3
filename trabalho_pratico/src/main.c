@@ -32,17 +32,17 @@ void determinar_pay_meth (char pay_meth, User * u)
     {
     case 'a':
         {
-            u->pay_meth = '0';
+            u->pay_meth = 0;
             return;
         }
     case 'r':
         {
-            u->pay_meth = '1';
+            u->pay_meth = 1;
             return;
         }
     case 'e':
         {
-            u->pay_meth = '2';
+            u->pay_meth = 2;
             return;
         }
     default:
