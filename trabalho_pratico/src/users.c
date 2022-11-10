@@ -101,6 +101,19 @@ static void push_node_array (node_array* a, char* name, int id, int l)          
     a->array[i].id= id;                                                             //Here*
 }
 
+static void get_user_node (node* n, char* name, int* id, int l)                 //Finds the user from a node
+{
+    if (n->a== NULL)                                                        
+    {
+        *id= n->id;
+        return;
+    }
+    for (int i= 0; i< n->a->size; i++)
+    {
+        if (n->a->array[i].name[l]== name[l])                                   //Found node with the same letter at level l
+            get_user_node (&n->a->array[i], name, id, l+1);
+    }
+}
 
 //--------API--------
 
@@ -122,8 +135,19 @@ array_user* init_array_user ()                                                  
     return a;
 }
 
-void push_user (User u, array_user* a_u, node_array* n_a)               //Pushes a User into the data structure
+void push_user (User u, array_user* a_u, node_array* n_a)                       //Pushes a User into the data structure
 {
     push_array_user (a_u, u);                                                       //Pushes user into the user_array thus matching the user with it's array index
-    push_node_array (n_a, u.user_n, a_u->pos-1, 0);                                         //Combined function call to match a user_name with the user id (index in the user_array)
+    push_node_array (n_a, u.user_n, a_u->pos-1, 0);                                 //Combined function call to match a user_name with the user id (index in the user_array)
 }
+
+int get_user_id (node_array* a, char* name)                                     //Returns User ID
+{
+    int id;
+    for (int i= 0; i< a->size; i++)
+    {
+        if (*a->array[i].name== *name)                                              //Found node with the same letter at level 0
+            get_user_node (&a->array[i], name, &id, 1);
+    }
+    return id;
+} 
