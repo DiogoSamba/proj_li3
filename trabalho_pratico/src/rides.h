@@ -1,5 +1,7 @@
 #ifndef RIDES
 #define RIDES
+#include "defines.h"
+#include <stdlib.h>
 
 /*Rides
     id;date;driver;user;city;distance;score_user;score_driver;tip;comment
@@ -28,11 +30,32 @@ typedef struct ride
     int dist;
     int score_u;
     int score_d;
-    int tip;
+    float tip;
     char* com;
 }Ride;
 
 typedef struct array_ride_driver* Array_Ride_Driver;
 typedef struct array_ride_user* Array_Ride_User;
 typedef struct array_ride* Array_Ride;
+
+Array_Ride init_array_ride ();
+void push_ride (Array_Ride a, Ride r);
+
+/*Rides
+    id;date;driver;user;city;distance;score_user;score_driver;tip;comment
+    querrys
+        cidade
+        preço
+        gorjeta
+        data ocurrencia
+*/
+
+/* Parametros: 
+    Cidade
+    Preço
+    Data
+    City is a Driver caracteristic.
+    Avaliação -> Condutor
+    Flag Gorjeta
+*/
 #endif
