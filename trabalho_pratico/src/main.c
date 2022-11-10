@@ -50,12 +50,11 @@ void determinar_pay_meth (char pay_meth, User * u)
     }
 }
 
-void set_database_user (Array_User a_u)      
+void set_database_user (Array_User a_u, Node_Array n_a)      
 {
     FILE * f_drivers = fopen ("../Dataset/users.csv", "r");
     char * lino = NULL;
     int id = 1, c;
-    Node_Array n_a =init_node_array ();
     User d;
     size_t len;
     getline (&lino, &len, f_drivers);
@@ -74,14 +73,12 @@ void set_database_user (Array_User a_u)
     }
 }
 
-int main ()
+void main ()
 {
     Array_Driver a_d = init_Array_Driver ();
     Array_User a_u = init_array_user ();
+    Node_Array n_a = init_node_array ();
     set_database_driver (a_d);
-    set_database_user (a_u);
-    printf ("ola");
-    Driver manuel = get_driver_id(a_d, 9998);
-    printf ("ola");
+    set_database_user (a_u, n_a);
 }
 
