@@ -86,6 +86,7 @@ static void push_node_array (node_array* a, char* name, int id, int l)          
         {
             a->array[i].name= name;
             a->array[i].id= id;
+            a->array[i].a= NULL;
             return;
         }
         if (a->array[i].name[l]== name[l])                                          //Found a node with the same letter at the same level
@@ -111,7 +112,10 @@ static void get_user_node (node* n, char* name, int* id, int l)                 
     for (int i= 0; i< n->a->size; i++)
     {
         if (n->a->array[i].name[l]== name[l])                                   //Found node with the same letter at level l
+        {
             get_user_node (&n->a->array[i], name, id, l+1);
+            return;
+        }
     }
 }
 
@@ -146,8 +150,8 @@ int get_user_id (node_array* a, char* name)                                     
     int id;
     for (int i= 0; i< a->size; i++)
     {
-        if (*a->array[i].name== *name)                                              //Found node with the same letter at level 0
-            get_user_node (&a->array[i], name, &id, 1);
+        if (a->array[i].name[0]== name[0])                                              //Found node with the same letter at level 0
+            get_user_node (&a->array[i], name, &id, 1); i= a->size;                     //Leaves the cycle
     }
     return id;
 } 

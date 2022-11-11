@@ -99,7 +99,7 @@ void main ()
     Array_Ride a_r = init_array_ride ();
     set_database_driver (a_d);
     set_database_user (a_u, n_a);
-    //set_database_rides (a_r, n_a);
+    set_database_rides (a_r, n_a);
     //In(a_d);
 }
 
