@@ -95,6 +95,16 @@ array_ride* init_array_ride ()                                                  
     return a;
 }
 
+Ride_Driver* get_ride_driver (array_ride_driver* a, int id)
+{
+    return &a->array[id];
+}
+
+Ride_User* get_ride_driver (array_ride_user* a, int id)
+{
+    return &a->array[id];
+}
+
 void push_ride (array_ride* a, array_ride_driver* a_r_d, array_ride_user* a_r_u, Ride* r)                                          //Pushes given ride into the ride array
 {
     if (a->pos== a->size)
