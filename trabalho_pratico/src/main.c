@@ -87,7 +87,7 @@ void set_database_rides (Array_Ride a_r, Node_Array n_a, Array_Driver a_d, Array
         sscanf (lino, "%d;%d/%d/%d;%d;%[^;];%c%[^;];%d;%d;%d;%f;%[^\n]", &idzito, &d.data[0], &d.data[1], &d.data[2], &d.driver_id, determinar, &d.city, lino, &d.dist, &d.score_u,
         &d.score_d, &d.tip, d.com);
         d.user_id = get_user_id(n_a, determinar);
-        //push_ride(a_r, a_r_d, a_r_u, &d, a_d);
+        push_ride(a_r, a_r_d, a_r_u, &d, a_d);
         //printf("ola");
     }
 }
@@ -103,6 +103,6 @@ void main ()
     set_database_driver (a_d);
     set_database_user (a_u, n_a);
     set_database_rides (a_r, n_a, a_d, a_r_d, a_r_u);
-    In (a_d, a_r_d, a_r_u);
+    In (a_d, a_u, a_r_d, a_r_u, n_a);
 }
 

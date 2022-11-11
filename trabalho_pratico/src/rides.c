@@ -145,7 +145,7 @@ void push_ride (array_ride* a, array_ride_driver* a_r_d, array_ride_user* a_r_u,
     float preco_ride = get_preco_ride (r->driver_id, a_d, r->dist);
     push_array_ride_driver (a_r_d, r, preco_ride);
     push_array_ride_user (a_r_u, r, preco_ride);
-    //a->pos++;
+    a->pos++;
 }
 
 

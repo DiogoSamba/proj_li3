@@ -10,7 +10,7 @@ typedef struct driver
     int id;
     char* name;
     int birth_date[3];
-    char gender;                                                                //0 Male 1 Female
+    char gender;                                                                //M Male F Female
     char class;
     char license_plate[7];
     char city;

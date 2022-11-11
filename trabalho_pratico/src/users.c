@@ -156,4 +156,9 @@ int get_user_id (node_array* a, char* name)                                     
         }
     }
     return id;
-} 
+}
+
+User get_user (int id, Array_User arr_u)
+{
+    return arr_u->user_array[id];
+}
