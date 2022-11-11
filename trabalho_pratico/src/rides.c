@@ -100,7 +100,7 @@ Ride_Driver* get_ride_driver (array_ride_driver* a, int id)
     return &a->array[id];
 }
 
-Ride_User* get_ride_driver (array_ride_user* a, int id)
+Ride_User* get_ride_user (array_ride_user* a, int id)
 {
     return &a->array[id];
 }

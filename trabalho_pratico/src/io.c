@@ -12,36 +12,37 @@ int calcular_idade (int * idadeX)
             return ano;
 }
 
-static void print_output_q1d (Driver * d)
+static void print_output_q1d (Driver * d, Ride_Driver * r_d)
 {
-    int idade = calcular_idade(d->birth_date);
-    printf("%s;%c;%d\n", d->name, d->gender, idade); 
+    int idade = calcular_idade(d->birth_date); 
+    double avaliacao_media = r_d->sum_score / r_d->rides;
+    printf("%s;%c;%d;%.3lf;%d\n", d->name, d->gender, idade, avaliacao_media, r_d->rides); 
 }
 
 //nuno.f.faria@inesctec.pt
 
-static void q1 (Array_Driver arr_d)
+static void q1 (Array_Driver arr_d, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u)
 {
     char id[30];
     scanf("%29s", id);
     int n;
-    Driver d;
     if (id[0] >= '0' && id[0] <= '9')
     {
         n = atoi(id);
-        d = get_driver_id(arr_d, n-1);
-        print_output_q1d(&d);
+        Ride_Driver * r_d = get_ride_driver(a_r_d, n);
+        Driver d = get_driver_id(arr_d, n);
+        print_output_q1d(&d, r_d);
     }   
 }
 
 
 
-void In (Array_Driver arr_d)
+void In (Array_Driver arr_d, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u)
 {
     char c = getchar();
     switch (c)
     {
-        case '1' : q1(arr_d); return;
+        case '1' : q1(arr_d, a_r_d, a_r_u); return;
         /*
         case '2' : q2(); return;
         case '3' : q3(); return;
