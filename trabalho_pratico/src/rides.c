@@ -17,27 +17,37 @@
 */   
 #include "rides.h"
 #define SMALL_A 10
-
+#define ARRAYD 10000
+#define ARRAYU 100000                                                     
+#define ARRAYR 1000000
 
 //--------Structs--------
 
+typedef struct ride_driver
+{
+    int sum_score;
+    int rides;
+    int cash;
+}ride_driver;
+
 typedef struct array_ride_driver
 {
-    int numb_score;
+    ride_driver* array;
+    int size;
+}array_ride_driver;
+
+typedef struct ride_user
+{
     int sum_score;
-    int viagens;
-    int recebido;
-}
-array_ride_driver;
+    int rides;
+    int cash;
+}ride_user;
 
 typedef struct array_ride_user
 {
-    int numb_score;
-    int sum_score;
-    int viagens;
-    int pago;
-}
-array_ride_user;
+    ride_user* array;
+    int size;
+}array_ride_user;
 
 typedef struct array_ride
 {
@@ -49,6 +59,23 @@ typedef struct array_ride
 
 //--------Functions--------
 
+
+//--------Array_Ride_Driver
+
+void push_array_ride_driver (array_ride_driver* a_r_d, Ride* r)
+{
+    a_r_d->array[r->driver_id].rides++;
+    a_r_d->array[r->driver_id].sum_score+= r->score_d; 
+    //a_r_d->array[r->driver_id].cash                                           É preciso calcular o valor auferido com cada viagem
+}
+
+//--------Array_Ride_User
+
+void push_array_ride_user (array_ride_user* a_r_d, Ride* r)
+{
+
+}
+
 //--------Array_Ride
 
 static void more_array_ride (array_ride* a)                                     //Doubes the size of the Ride's Array
@@ -59,21 +86,36 @@ static void more_array_ride (array_ride* a)                                     
 
 //--------API
 
+array_ride_driver* init_array_ride_driver ()                                    //Returns a ride_driver array
+{
+    array_ride_driver* a= malloc (sizeof (array_ride_driver));
+    a->array= malloc (ARRAYD* sizeof (ride_driver));
+    a->size= ARRAYD;
+}
 
+array_ride_user* init_array_ride_user ()                                        //Returns a ride_user array
+{
+    array_ride_driver* a= malloc (sizeof (array_ride_driver));
+    a->array= malloc (ARRAYU* sizeof (ride_driver));
+    a->size= ARRAYU;
+}
 
 array_ride* init_array_ride ()                                                  //Returns a ride array
 {
     array_ride* a= malloc (sizeof (array_ride));
     a->pos= 0;
-    a->size= SMALL_A;
-    a->array= malloc (SMALL_A* sizeof (Ride));
+    a->size= ARRAYR;
+    a->array= malloc (ARRAYR* sizeof (Ride));
     return a;
 }
 
-void push_ride (array_ride* a, Ride r)                                          //Pushes given ride into the ride array
+void push_ride (array_ride* a, array_ride_driver* a_r_d, array_ride_user* a_r_u, Ride* r)                                          //Pushes given ride into the ride array
 {
     if (a->pos== a->size)
         more_array_ride (a);
-    a->array[a->pos++]= r;
+    a->array[a->pos]= *r;
+    push_ride_driver (a_r_d, r);
+    push_ride_user (a_r_u, r);
+    //a->pos++;
 }
 

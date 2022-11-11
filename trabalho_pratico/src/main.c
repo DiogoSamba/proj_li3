@@ -87,7 +87,7 @@ void set_database_rides (Array_Ride a_r, Node_Array n_a)
         sscanf (lino, "%d;%d/%d/%d;%d;%[^;];%c%[^;];%d;%d;%d;%f;%[^\n]", &idzito, &d.data[0], &d.data[1], &d.data[2], &d.driver_id, determinar, &d.city, lino, &d.dist, &d.score_u,
         &d.score_d, &d.tip, d.com);
         d.user_id = get_user_id(n_a, determinar);
-        push_ride(a_r, d);
+        //push_ride(a_r, d);
     }
 }
 
