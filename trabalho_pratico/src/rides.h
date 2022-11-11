@@ -40,6 +40,7 @@ typedef struct ride_driver
     int sum_score;
     int rides;
     float cash;
+    int data_mrecente [3];
 }Ride_Driver;
 
 typedef struct ride_user
@@ -47,6 +48,7 @@ typedef struct ride_user
     int sum_score;
     int rides;
     float cash;
+    int data_mrecente [3];
 }Ride_User;
 
 typedef struct array_ride_driver* Array_Ride_Driver;

@@ -46,6 +46,36 @@ typedef struct array_ride
 
 //--------Functions--------
 
+//--------Determinar data mais recente
+
+static int determina_data_mrecente(int * data_stored, int * data_atual) 
+{
+    if(data_stored[2] == data_atual[2])
+    {
+        if (data_stored[1] == data_atual[1])
+        {
+            if(data_stored[0]<data_atual[0])
+                return 1;
+            else    
+                return 0;
+        }
+        else
+        {
+            if(data_stored[1]<data_atual[1])
+                return 1;
+            else 
+                return 0;
+        }
+    }
+    else
+    {
+        if (data_stored[2]<data_atual[2])
+            return 1;
+        else
+            return 0;
+    }
+}
+
 //--------Preço das viagens Driver
 
 static float get_preco_ride(int id, Array_Driver a_d, int dist)
@@ -82,6 +112,12 @@ static void push_array_ride_driver (array_ride_driver* a_r_d, Ride* r, float pre
     a_r_d->array[id].rides++;
     a_r_d->array[id].sum_score += r->score_d; 
     a_r_d->array[id].cash += preco_ride + r->tip;
+    if (determina_data_mrecente(a_r_d->array[id].data_mrecente, r->data))
+    {
+        a_r_d->array[id].data_mrecente[0] = r->data[0];
+        a_r_d->array[id].data_mrecente[1] = r->data[1];
+        a_r_d->array[id].data_mrecente[2] = r->data[2];
+    }
 }
 
 //--------Array_Ride_User
@@ -91,7 +127,13 @@ static void push_array_ride_user (array_ride_user* a_r_u, Ride* r, float preco_r
     int id = r->user_id;
     a_r_u->array[id].rides++;
     a_r_u->array[id].sum_score += r->score_u;
-    a_r_u->array[id].cash += preco_ride + r->tip; 
+    a_r_u->array[id].cash += preco_ride + r->tip;
+    if (determina_data_mrecente(a_r_u->array[id].data_mrecente, r->data))
+    {
+        a_r_u->array[id].data_mrecente[0] = r->data[0];
+        a_r_u->array[id].data_mrecente[1] = r->data[1];
+        a_r_u->array[id].data_mrecente[2] = r->data[2];
+    }    
 }
 
 //--------Array_Ride
