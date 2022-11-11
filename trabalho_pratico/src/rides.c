@@ -47,7 +47,7 @@ typedef struct array_ride
 
 //--------Functions--------
 
-//--------Preço das viagens
+//--------Preço das viagens Driver
 
 static float get_preco_ride(int id, Array_Driver a_d, int dist)
 {
@@ -77,22 +77,22 @@ static float get_preco_ride(int id, Array_Driver a_d, int dist)
 
 //--------Array_Ride_Driver
 
-static void push_array_ride_driver (array_ride_driver* a_r_d, Ride* r, Array_Driver a_d)
+static void push_array_ride_driver (array_ride_driver* a_r_d, Ride* r, float preco_ride)
 {
     int id = r->driver_id;
     a_r_d->array[id].rides++;
     a_r_d->array[id].sum_score += r->score_d; 
-    float preco_ride = get_preco_ride(id, a_d, r->dist);
-    a_r_d->array[id].cash = preco_ride + r->tip;
+    a_r_d->array[id].cash += preco_ride + r->tip;
 }
 
 //--------Array_Ride_User
 
-static void push_array_ride_user (array_ride_user* a_r_d, Ride* r)
+static void push_array_ride_user (array_ride_user* a_r_u, Ride* r, float preco_ride)
 {
-    a_r_d->array[r->user_id].rides++;
-    a_r_d->array[r->user_id].sum_score+= r->score_d;
-    
+    int id = r->user_id;
+    a_r_u->array[id].rides++;
+    a_r_u->array[id].sum_score += r->score_u;
+    a_r_u->array[id].cash += preco_ride + r->tip; 
 }
 
 //--------Array_Ride
@@ -143,8 +143,9 @@ void push_ride (array_ride* a, array_ride_driver* a_r_d, array_ride_user* a_r_u,
     if (a->pos== a->size)
         more_array_ride (a);
     a->array[a->pos]= *r;
-    push_array_ride_driver (a_r_d, r, a_d);
-    push_array_ride_user (a_r_u, r);
+    float preco_ride = get_preco_ride (r->driver_id, a_d, r->dist);
+    push_array_ride_driver (a_r_d, r, preco_ride);
+    push_array_ride_user (a_r_u, r, preco_ride);
     //a->pos++;
 }
 
