@@ -34,6 +34,20 @@ typedef struct ride
     char* com;
 }Ride;
 
+typedef struct ride_driver
+{
+    int sum_score;
+    int rides;
+    int cash;
+}Ride_Driver;
+
+typedef struct ride_user
+{
+    int sum_score;
+    int rides;
+    int cash;
+}Ride_User;
+
 typedef struct array_ride_driver* Array_Ride_Driver;
 typedef struct array_ride_user* Array_Ride_User;
 typedef struct array_ride* Array_Ride;
