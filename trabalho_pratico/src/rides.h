@@ -39,7 +39,7 @@ typedef struct array_ride_user* Array_Ride_User;
 typedef struct array_ride* Array_Ride;
 
 Array_Ride init_array_ride ();
-void push_ride (Array_Ride a, Ride r);
+void push_ride (Array_Ride a, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u, Ride r);
 
 /*Rides
     id;date;driver;user;city;distance;score_user;score_driver;tip;comment
