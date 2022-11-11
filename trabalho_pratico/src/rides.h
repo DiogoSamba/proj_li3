@@ -52,12 +52,12 @@ typedef struct array_ride_driver* Array_Ride_Driver;
 typedef struct array_ride_user* Array_Ride_User;
 typedef struct array_ride* Array_Ride;
 
-//Array_Ride init_array_ride ();
-//void push_ride (Array_Ride a, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u, Ride* r);
-//Array_Ride_Driver init_array_ride_driver ();                                    //Returns a ride_driver array
-//Array_Ride_User init_array_ride_user ();                                        //Returns a ride_user array
-//Ride_Driver* get_ride_driver (Array_Ride_Driver a, int id);
-//Ride_User* get_ride_user (Array_User a_u, Array_Ride_User a, int id);
+Array_Ride init_array_ride ();
+void push_ride (Array_Ride a, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u, Ride* r, Array_Driver a_d);
+Array_Ride_Driver init_array_ride_driver ();                                    //Returns a ride_driver array
+Array_Ride_User init_array_ride_user ();                                        //Returns a ride_user array
+Ride_Driver* get_ride_driver (Array_Ride_Driver a, int id);
+Ride_User* get_ride_user (Array_Ride_User a, int id);
 
 /*Rides
     id;date;driver;user;city;distance;score_user;score_driver;tip;comment
