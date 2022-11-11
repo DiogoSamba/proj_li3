@@ -92,7 +92,7 @@ static void push_node_array (node_array* a, char* name, int id, int l)          
         {
             if (a->array[i].a== NULL)                                               //If the node doesn't have an inicialized array (the node had a unique symbol combination)
                 set_node_up (&a->array[i]);
-            push_node_array (a->array[i].a, name, id, l+1);                          //Recalls the function after the node structure has been changed
+            push_node_array (a->array[i].a, name, id, l+1);                         //Recalls the function after the node structure has been changed
             return;
         }
     }                                                                               //We can correctly assume we weren't able to find neither an open space nor a matching letter for our fucntion. As such, we need to get some space
@@ -150,7 +150,10 @@ int get_user_id (node_array* a, char* name)                                     
     for (int i= 0; i< a->size; i++)
     {
         if (a->array[i].name[0]== name[0])                                              //Found node with the same letter at level 0
-            get_user_node (&a->array[i], name, &id, 1); i= a->size;                     //Leaves the cycle
+        {
+            get_user_node (&a->array[i], name, &id, 1);
+            i= a->size;                                                                 //Leaves the cycle
+        }
     }
     return id;
 } 

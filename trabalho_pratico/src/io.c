@@ -1,25 +1,11 @@
 #include "io.h"
 
-int calcular_idade (int * idadeX)
-{
-    int ano = IDADE_ANO_STD - idadeX[2];
-    if (IDADE_MES_STD<idadeX[1])
-        return ano-1;
-    else
-        if(IDADE_DIA_STD<idadeX[0])
-            return ano-1;
-        else
-            return ano;
-}
-
 static void print_output_q1d (Driver * d, Ride_Driver * r_d)
 {
     int idade = calcular_idade(d->birth_date); 
     double avaliacao_media = r_d->sum_score / r_d->rides;
     printf("%s;%c;%d;%.3lf;%d\n", d->name, d->gender, idade, avaliacao_media, r_d->rides); 
 }
-
-//nuno.f.faria@inesctec.pt
 
 static void q1 (Array_Driver arr_d, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u)
 {
@@ -36,6 +22,19 @@ static void q1 (Array_Driver arr_d, Array_Ride_Driver a_r_d, Array_Ride_User a_r
 }
 
 
+//--------API
+
+int calcular_idade (int * idadeX)
+{
+    int ano = IDADE_ANO_STD - idadeX[2];
+    if (IDADE_MES_STD<idadeX[1])
+        return ano-1;
+    else
+        if(IDADE_DIA_STD<idadeX[0])
+            return ano-1;
+        else
+            return ano;
+}
 
 void In (Array_Driver arr_d, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u)
 {
