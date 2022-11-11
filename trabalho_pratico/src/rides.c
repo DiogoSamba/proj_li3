@@ -16,6 +16,7 @@
     Flag Gorjeta
 */   
 #include "rides.h"
+#include "drivers.h"
 #define SMALL_A 10
 #define ARRAYD 10000
 #define ARRAYU 100000                                                     
@@ -45,19 +46,48 @@ typedef struct array_ride
 
 //--------Functions--------
 
+//--------Preço das viagens
+
+static float get_preco_ride(int id, Array_Driver a_d, int dist)
+{
+    Driver d = get_driver_id(a_d, id);
+    float preco;
+    switch (d.class)
+    {
+        case 'b':
+            {
+                preco = 3.25 + (0.62 * dist);
+                return preco;
+            }
+        case 'g':
+            {
+                preco = 4.00 + (0.79 * dist);
+                return preco;
+            }
+        case 'p':
+            {
+                preco = 5.20 + (0.94 * dist);
+                return preco;
+            }
+        default:
+                return 0.00;
+    }
+}
 
 //--------Array_Ride_Driver
 
-void push_array_ride_driver (array_ride_driver* a_r_d, Ride* r)
+static void push_array_ride_driver (array_ride_driver* a_r_d, Ride* r, Array_Driver a_d)
 {
-    a_r_d->array[r->driver_id].rides++;
-    a_r_d->array[r->driver_id].sum_score+= r->score_d; 
-    //a_r_d->array[r->driver_id].cash                                           É preciso calcular o valor auferido com cada viagem
+    int id = r->driver_id;
+    a_r_d->array[id].rides++;
+    a_r_d->array[id].sum_score += r->score_d; 
+    float preco_ride = get_preco_ride(id, a_d, r->dist);
+    a_r_d->array[id].cash = preco_ride + r->tip;
 }
 
 //--------Array_Ride_User
 
-void push_array_ride_user (array_ride_user* a_r_d, Ride* r)
+static void push_array_ride_user (array_ride_user* a_r_d, Ride* r)
 {
 
 }
@@ -105,13 +135,13 @@ Ride_User* get_ride_user (array_ride_user* a, int id)
     return &a->array[id];
 }
 
-void push_ride (array_ride* a, array_ride_driver* a_r_d, array_ride_user* a_r_u, Ride* r)                                          //Pushes given ride into the ride array
+void push_ride (array_ride* a, array_ride_driver* a_r_d, array_ride_user* a_r_u, Ride* r, Array_Driver a_d)                                          //Pushes given ride into the ride array
 {
     if (a->pos== a->size)
         more_array_ride (a);
     a->array[a->pos]= *r;
-    push_ride_driver (a_r_d, r);
-    push_ride_user (a_r_u, r);
+    push_array_ride_driver (a_r_d, r, a_d);
+    push_array_ride_user (a_r_u, r);
     //a->pos++;
 }
 

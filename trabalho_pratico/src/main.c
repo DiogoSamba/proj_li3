@@ -71,7 +71,7 @@ void set_database_user (Array_User a_u, Node_Array n_a)
     }
 }
 
-void set_database_rides (Array_Ride a_r, Node_Array n_a)      
+void set_database_rides (Array_Ride a_r, Node_Array n_a, Array_Driver a_d)      
 {
     FILE * f_rides = fopen ("../Dataset/rides.csv", "r");
     char * lino = NULL, * determinar = calloc(1,30);
@@ -99,7 +99,7 @@ void main ()
     Array_Ride a_r = init_array_ride ();
     set_database_driver (a_d);
     set_database_user (a_u, n_a);
-    set_database_rides (a_r, n_a);
+    set_database_rides (a_r, n_a, a_d);
     //In(a_d);
 }
 
