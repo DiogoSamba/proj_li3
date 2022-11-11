@@ -1,6 +1,7 @@
 #ifndef RIDES
 #define RIDES
 #include "defines.h"
+#include "drivers.h"
 #include <stdlib.h>
 
 /*Rides
@@ -45,7 +46,7 @@ typedef struct ride_user
 {
     int sum_score;
     int rides;
-    int cash;
+    float cash;
 }Ride_User;
 
 typedef struct array_ride_driver* Array_Ride_Driver;
