@@ -23,29 +23,15 @@
 
 //--------Structs--------
 
-typedef struct ride_driver
-{
-    int sum_score;
-    int rides;
-    int cash;
-}ride_driver;
-
 typedef struct array_ride_driver
 {
-    ride_driver* array;
+    Ride_Driver* array;
     int size;
 }array_ride_driver;
 
-typedef struct ride_user
-{
-    int sum_score;
-    int rides;
-    int cash;
-}ride_user;
-
 typedef struct array_ride_user
 {
-    ride_user* array;
+    Ride_User* array;
     int size;
 }array_ride_user;
 
@@ -89,14 +75,14 @@ static void more_array_ride (array_ride* a)                                     
 array_ride_driver* init_array_ride_driver ()                                    //Returns a ride_driver array
 {
     array_ride_driver* a= malloc (sizeof (array_ride_driver));
-    a->array= malloc (ARRAYD* sizeof (ride_driver));
+    a->array= malloc (ARRAYD* sizeof (Ride_Driver));
     a->size= ARRAYD;
 }
 
 array_ride_user* init_array_ride_user ()                                        //Returns a ride_user array
 {
     array_ride_driver* a= malloc (sizeof (array_ride_driver));
-    a->array= malloc (ARRAYU* sizeof (ride_driver));
+    a->array= malloc (ARRAYU* sizeof (Ride_User));
     a->size= ARRAYU;
 }
 
@@ -118,4 +104,6 @@ void push_ride (array_ride* a, array_ride_driver* a_r_d, array_ride_user* a_r_u,
     push_ride_user (a_r_u, r);
     //a->pos++;
 }
+
+
 
