@@ -16,6 +16,7 @@
     Flag Gorjeta
 */   
 #include "rides.h"
+#include "users.h"
 #define SMALL_A 10
 #define ARRAYD 10000
 #define ARRAYU 100000                                                     
@@ -57,9 +58,11 @@ void push_array_ride_driver (array_ride_driver* a_r_d, Ride* r)
 
 //--------Array_Ride_User
 
-void push_array_ride_user (array_ride_user* a_r_d, Ride* r)
+void push_array_ride_user (Node_Array n_a, array_ride_user* a_r_d, Ride* r)     //Pushes data from the argument ride to the given User's array
 {
-
+    a_r_d->array[r->user_id].rides++;
+    a_r_d->array[r->user_id].sum_score+= r->score_d;
+    
 }
 
 //--------Array_Ride
@@ -100,18 +103,18 @@ Ride_Driver* get_ride_driver (array_ride_driver* a, int id)
     return &a->array[id];
 }
 
-Ride_User* get_ride_driver (array_ride_user* a, int id)
+Ride_User* get_ride_user (array_ride_user* a, int id)
 {
     return &a->array[id];
 }
 
-void push_ride (array_ride* a, array_ride_driver* a_r_d, array_ride_user* a_r_u, Ride* r)                                          //Pushes given ride into the ride array
+void push_ride (Array_User a_u ,array_ride* a, array_ride_driver* a_r_d, array_ride_user* a_r_u, Ride* r)                                          //Pushes given ride into the ride array
 {
     if (a->pos== a->size)
         more_array_ride (a);
     a->array[a->pos]= *r;
     push_ride_driver (a_r_d, r);
-    push_ride_user (a_r_u, r);
+    push_ride_user (a_u, a_r_u, r);
     //a->pos++;
 }
 
