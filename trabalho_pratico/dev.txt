@@ -11,3 +11,7 @@ Desenvolvimento do programa:
     Fase 4- Receber comandos e aplicar as funções anteriormente definidas para os responder. Respeitando a modularidade do programa e encapsulamento.
     Fase 5- Makefile 
     
+
+Email do formador:
+
+nuno.f.faria@inesctec.pt
