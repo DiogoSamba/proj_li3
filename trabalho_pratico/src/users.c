@@ -86,7 +86,6 @@ static void push_node_array (node_array* a, char* name, int id, int l)          
         {
             a->array[i].name= name;
             a->array[i].id= id;
-            a->array[i].a= NULL;
             return;
         }
         if (a->array[i].name[l]== name[l])                                          //Found a node with the same letter at the same level

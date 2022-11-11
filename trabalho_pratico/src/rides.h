@@ -38,7 +38,7 @@ typedef struct ride_driver
 {
     int sum_score;
     int rides;
-    int cash;
+    float cash;
 }Ride_Driver;
 
 typedef struct ride_user
