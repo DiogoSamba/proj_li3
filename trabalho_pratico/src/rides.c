@@ -21,6 +21,7 @@
 #define ARRAYD 10000
 #define ARRAYU 100000                                                     
 #define ARRAYR 1000000
+#define TARGETRANGE 2
 
 //--------Structs--------
 
@@ -43,6 +44,17 @@ typedef struct array_ride
     Ride* array;
 }array_ride;
 
+typedef struct rate_driver
+{
+    int id;
+    double rating;
+}rate_driver;
+
+typedef struct array_rate_driver
+{
+    int size;
+    rate_driver* array;
+}array_rate_driver;
 
 //--------Functions--------
 
@@ -144,7 +156,55 @@ static void more_array_ride (array_ride* a)                                     
     a->array= realloc (a->array, a->size* sizeof (Ride));
 }
 
+//--------Array_Rate_Driver
+
+static void reduce_array_rate_driver (array_rate_driver* a, int n)                  //Returns an array with the unordered top a, a is set between 'n'and 'TARGETRANGE*n'
+{
+    int i, j, refi= 0;                                                              //refi (reference index) Keeps the chosen reference index in case we need to choose another one (j>= n)
+    rate_driver ref;
+    while (a->size> TARGETRANGE*n)
+    {
+        array_rate_driver new*= malloc (sizeof (array_rate_driver));
+        new.array= malloc (a->size* sizeof (rate_driver))
+        new.size= a->size;
+        for (i= refi; i< a->size; i++)
+        {
+            if (a->array[i].rating!= 0)
+            {
+                ref= a->array[i];                                                   //Reference by wich we compare the other members of the array. We choose a reference different that zero to eliminate the most elements possible out of the array
+                refi= i+1;                                                          //refi takes the value of the chosen index +1
+                i= a->size;                                                         //break the cycle
+            }
+        }
+        for (i= 0, j= 0; i< a->size; i++)
+        {
+            if (a->array[i].rating> ref.rating)                                     //If a given driver's rating is higher than our reference value we assign it to the 'new' array
+                new [j++]= a->array[i];                                             //
+        }
+        if (j>=n)                                                                   //Our selection must contain the top 'n' elements
+        {
+            free (a->array);                                                        //Frees 'old' array struct
+            free (a);                                                               //
+            new->size= j;                                                           //Assignement of 'new' array struct to 'a'
+            a=new;                                                                  //
+            refi= 0;                                                                //Resets refi
+        }
+        else
+        {
+            free (new->array);                                                      //Frees useless array struct
+            free (new);                                                             //
+        }
+    }    
+}
+
+int* order_array_rate_driver (Array_Rate_Driver a, int n)
+{
+    
+}
+
+
 //--------API
+
 
 array_ride_driver* init_array_ride_driver ()                                    //Returns a ride_driver array
 {
@@ -168,6 +228,28 @@ array_ride* init_array_ride ()                                                  
     a->array= malloc (ARRAYR* sizeof (Ride));
     return a;
 }
+
+Array_Rate_Driver init_array_rate_driver (array_ride_driver* a)
+{
+    array_rate_driver* ard= malloc (sizeof (array_rate_driver));
+    ard->size= a->size;
+    ard->array= malloc (ard->size* sizeof (rate_driver));
+    for (int i= 0; i< ard->size; i++)
+    {
+        ard->array[i].id= i;                                                    //Important to assign this as we will swap some arguments of our array latter on
+        ard->array[i].rating= a->array[i].sum_score/ a->array[i].rides;         //Calculates the average score and assigns it to the rating var.
+    }
+    return ard;
+}
+
+int* top_rated_drivers (Array_Rate_Driver a, int n)                             //Returns an array of the top rated drivers from the best rating(index 0) to the worst (index n-1)
+{
+    int* res= malloc (n* sizeof (int));                                         //Result will be assigned here
+    reduce_array_rate_driver (a, n);                                            //Reduces array in size
+    res= order_array_rate_driver (a, n);                                        //Orders reduced array
+    retun res;                                                                 
+}
+
 
 Ride_Driver* get_ride_driver (array_ride_driver* a, int id)
 {
