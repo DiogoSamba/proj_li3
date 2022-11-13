@@ -1,5 +1,9 @@
 #include "io.h"
 
+
+//--------Functions--------
+
+
 static void print_output_q1d (Driver * d, Ride_Driver * r_d)
 {
     int idade = calcular_idade(d->birth_date); 
@@ -45,6 +49,7 @@ static void q1 (Array_Driver arr_d, Array_User arr_u, Array_Ride_Driver a_r_d, A
 
 
 //--------API
+
 
 int calcular_idade (int * idadeX)
 {
