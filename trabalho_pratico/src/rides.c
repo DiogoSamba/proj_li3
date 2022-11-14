@@ -164,9 +164,9 @@ static void reduce_array_rate_driver (array_rate_driver* a, int n)              
     rate_driver ref;
     while (a->size> TARGETRANGE*n)
     {
-        array_rate_driver new*= malloc (sizeof (array_rate_driver));
-        new.array= malloc (a->size* sizeof (rate_driver))
-        new.size= a->size;
+        array_rate_driver* new= malloc (sizeof (array_rate_driver));
+        new->array= malloc (a->size* sizeof (rate_driver));
+        new->size= a->size;
         for (i= refi; i< a->size; i++)
         {
             if (a->array[i].rating!= 0)
@@ -179,7 +179,7 @@ static void reduce_array_rate_driver (array_rate_driver* a, int n)              
         for (i= 0, j= 0; i< a->size; i++)
         {
             if (a->array[i].rating> ref.rating)                                     //If a given driver's rating is higher than our reference value we assign it to the 'new' array
-                new [j++]= a->array[i];                                             //
+                new->array[j++]= a->array[i];                                             //
         }
         if (j>=n)                                                                   //Our selection must contain the top 'n' elements
         {
@@ -247,7 +247,7 @@ int* top_rated_drivers (Array_Rate_Driver a, int n)                             
     int* res= malloc (n* sizeof (int));                                         //Result will be assigned here
     reduce_array_rate_driver (a, n);                                            //Reduces array in size
     res= order_array_rate_driver (a, n);                                        //Orders reduced array
-    retun res;                                                                 
+    return res;                                                                 
 }
 
 
