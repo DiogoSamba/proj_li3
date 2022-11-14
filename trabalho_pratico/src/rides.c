@@ -140,6 +140,7 @@ static void push_array_ride_user (array_ride_user* a_r_u, Ride* r, float preco_r
     a_r_u->array[id].rides++;
     a_r_u->array[id].sum_score += r->score_u;
     a_r_u->array[id].cash += preco_ride + r->tip;
+    a_r_u->array[id].sum_dist += r->dist;
     if (determina_data_mrecente(a_r_u->array[id].data_mrecente, r->data))
     {
         a_r_u->array[id].data_mrecente[0] = r->data[0];

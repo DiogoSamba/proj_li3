@@ -48,6 +48,21 @@ static void q1 (Array_Driver arr_d, Array_User arr_u, Array_Ride_Driver a_r_d, A
 }
 
 
+static void q2()
+{
+    char id [6];
+    scanf("%5s", id);
+    int n = atoi(id);
+}
+
+
+static void q3()
+{
+    char id [6];
+    scanf("%5s", id);
+    int n = atoi(id);
+}
+
 //--------API
 
 
@@ -69,9 +84,9 @@ void In (Array_Driver arr_d, Array_User arr_u, Array_Ride_Driver a_r_d, Array_Ri
     switch (c)
     {
         case '1' : q1(arr_d, arr_u, a_r_d, a_r_u, n_a); return;
-        /*
         case '2' : q2(); return;
         case '3' : q3(); return;
+        /*
         case '4' : q4(); return;
         case '5' : q5(); return;
         case '6' : q6(); return;
