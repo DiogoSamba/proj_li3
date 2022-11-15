@@ -219,12 +219,23 @@ static void reduce_array_rate_driver (array_rate_driver* a, int n)              
     }    
 }
 
-int* order_array_rate_driver (Array_Rate_Driver a, int n)                       
+static void ordena_datas (array_rate_driver* a,int n)
+{
+
+}
+
+static int* order_array_rate_driver (array_rate_driver* a, int n)                       
 {
     int* res= malloc (n* sizeof(int));
     merge_sort (a->array, a->size);                                             
-    int j= 0;
-    for (int i= a->size- n- 1; i< n; i++)
+    int i= 0, j= 0, k;
+    for (i= 0; i< a->size-1; i++)
+        if (a->array[i].rating!= a->array[i+1].rating)
+            return;
+    k= i;                                                                           //Variable k stores the members of the array that have the same classification so we can compare the dates
+    if (!k)                                                                         //
+        ordena_datas (a, k);
+    for (i= a->size- n- 1; i< n; i++)
         res[j++]= a->array[i].id;
     return res;
 }
