@@ -159,7 +159,30 @@ static void more_array_ride (array_ride* a)                                     
 
 //--------Array_Rate_Driver
 
-static void reduce_array_rate_driver (array_rate_driver* a, int n)                  //Returns an array with the unordered top a, a is set between 'n'and 'TARGETRANGE*n'
+static void merge_sort (rate_driver* a, int size)                               //Aplica 
+{
+    if (size== 1)
+        return;
+    rate_driver ref= a[0];
+    rate_driver maior[size];
+    int j=0, k=0;
+    for (int i= 1; i< size; i++)
+    {
+        if (a[i].id> ref.id)
+            maior[j++]= a[i];
+        else
+            a[k++]= a[i];
+    } 
+    a[k++]= ref;
+    for (int i= 0; i< j; i++)                                                       //Ordena o array segundos as chunks de 'menor' 'ref' e 'maior'.
+    {
+        a[i+k]= maior[i];
+    }
+    merge_sort (a, k);
+    merge_sort (&a[k], j);
+}
+
+static void reduce_array_rate_driver (array_rate_driver* a, int n)              //Returns an array with the unordered top a, a is set between 'n'and 'TARGETRANGE*n'
 {
     int i, j, refi= 0;                                                              //refi (reference index) Keeps the chosen reference index in case we need to choose another one (j>= n)
     rate_driver ref;
@@ -180,12 +203,11 @@ static void reduce_array_rate_driver (array_rate_driver* a, int n)              
         for (i= 0, j= 0; i< a->size; i++)
         {
             if (a->array[i].rating> ref.rating)                                     //If a given driver's rating is higher than our reference value we assign it to the 'new' array
-                new->array[j++]= a->array[i];                                             //
+                new->array[j++]= a->array[i];                                       //
         }
         if (j>=n)                                                                   //Our selection must contain the top 'n' elements
         {
             free (a->array);                                                        //Frees 'old' array struct
-            free (a);                                                               //
             new->size= j;                                                           //Assignement of 'new' array struct to 'a'
             a=new;                                                                  //
             refi= 0;                                                                //Resets refi
@@ -198,9 +220,14 @@ static void reduce_array_rate_driver (array_rate_driver* a, int n)              
     }    
 }
 
-int* order_array_rate_driver (Array_Rate_Driver a, int n)
+int* order_array_rate_driver (Array_Rate_Driver a, int n)                       
 {
-    
+    int* res= malloc (n* sizeof(int));
+    merge_sort (a->array, a->size);                                             
+    int j= 0;
+    for (int i= a->size- n- 1; i< n; i++)
+        res[j++]= a->array[i].id;
+    return res;
 }
 
 
