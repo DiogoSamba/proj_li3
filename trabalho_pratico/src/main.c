@@ -103,6 +103,7 @@ void main ()
     set_database_driver (a_d);
     set_database_user (a_u, n_a);
     set_database_rides (a_r, n_a, a_d, a_r_d, a_r_u);
-    In (a_d, a_u, a_r_d, a_r_u, n_a);
+    Array_Rate_Driver a_rate_d = init_array_rate_driver(a_r_d);
+    In (a_d, a_u, a_r_d, a_r_u, n_a, a_rate_d);
 }
 

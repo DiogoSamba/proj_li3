@@ -265,7 +265,10 @@ Array_Rate_Driver init_array_rate_driver (array_ride_driver* a)
     for (int i= 0; i< ard->size; i++)
     {
         ard->array[i].id= i;                                                    //Important to assign this as we will swap some arguments of our array latter on
-        ard->array[i].rating= a->array[i].sum_score/ a->array[i].rides;         //Calculates the average score and assigns it to the rating var.
+        if(!a->array[i].rides)
+            ard->array[i].rating = 0.000;
+        else    
+            ard->array[i].rating= a->array[i].sum_score/ a->array[i].rides;         //Calculates the average score and assigns it to the rating var.
     }
     return ard;
 }

@@ -60,7 +60,7 @@ typedef struct array_rate_driver* Array_Rate_Driver;
 Array_Ride init_array_ride ();
 Array_Ride_Driver init_array_ride_driver ();                                    //Returns a ride_driver array
 Array_Ride_User init_array_ride_user ();                                        //Returns a ride_user array
-Array_Rate_Driver init_array_rate_driver ();
+Array_Rate_Driver init_array_rate_driver (Array_Ride_Driver a_r_d);
 void push_ride (Array_Ride a, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u, Ride* r, Array_Driver a_d);
 Ride_Driver* get_ride_driver (Array_Ride_Driver a, int id);
 Ride_User* get_ride_user (Array_Ride_User a, int id);

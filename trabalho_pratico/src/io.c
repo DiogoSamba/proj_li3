@@ -47,12 +47,32 @@ static void q1 (Array_Driver arr_d, Array_User arr_u, Array_Ride_Driver a_r_d, A
     }
 }
 
+static void print_output_q2 (int * array_top_d, Array_Driver a_d, int n, Array_Ride_Driver a_r_d)
+{
+    int i, id;
+    Driver xpto;
+    float avaliacao_media;
+    for(i = n-1; i >= 0; i--)
+    {
+        id = array_top_d[i];
+        xpto = get_driver_id(a_d, id);
+        Ride_Driver * r_d = get_ride_driver(a_r_d, id-1);
+        if (!r_d->rides)
+            avaliacao_media = 0.000;
+        else
+            avaliacao_media = ((float)r_d->sum_score) / ((float)r_d->rides);
+        printf("%d;%s;%.3f\n",id, xpto.name, avaliacao_media);
+    }
+}
 
-static void q2()
+
+static void q2 (Array_Rate_Driver a_rate_d, Array_Driver a_d, Array_Ride_Driver a_r_d)
 {
     char id [6];
     scanf("%5s", id);
     int n = atoi(id);
+    int * array_top_d = top_rated_drivers(a_rate_d, n);
+    print_output_q2(array_top_d, a_d, n, a_r_d);
 }
 
 
@@ -78,13 +98,13 @@ int calcular_idade (int * idadeX)
             return ano;
 }
 
-void In (Array_Driver arr_d, Array_User arr_u, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u, Node_Array n_a)
+void In (Array_Driver arr_d, Array_User arr_u, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u, Node_Array n_a, Array_Rate_Driver a_rate_d)
 {
     char c = getchar();
     switch (c)
     {
         case '1' : q1(arr_d, arr_u, a_r_d, a_r_u, n_a); return;
-        case '2' : q2(); return;
+        case '2' : q2(a_rate_d, arr_d, a_r_d); return;
         case '3' : q3(); return;
         /*
         case '4' : q4(); return;
