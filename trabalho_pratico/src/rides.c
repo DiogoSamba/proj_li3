@@ -201,28 +201,30 @@ static void reduce_array_rate_driver (array_rate_driver* a, int n)              
             }
         }
         for (i= 0, j= 0; i< a->size; i++)
-        {
             if (a->array[i].rating> ref.rating)                                     //If a given driver's rating is higher than our reference value we assign it to the 'new' array
                 new->array[j++]= a->array[i];                                       //
-        }
-        if (j>=n)                                                                   //Our selection must contain the top 'n' elements
-        {
-            free (a->array);                                                        //Frees 'old' array struct
-            new->size= j;                                                           //Assignement of 'new' array struct to 'a'
-            a=new;                                                                  //
-            refi= 0;                                                                //Resets refi
-        }
+        if (!j)
+            refi++;
         else
-        {
-            free (new->array);                                                      //Frees useless array struct
-            free (new);                                                             //
-        }
+            if (j>=n)                                                                   //Our selection must contain the top 'n' elements
+            {
+                free (a->array);                                                        //Frees 'old' array struct
+                new->size= j;                                                           //Assignement of 'new' array struct to 'a'
+                a=new;                                                                  //
+                refi= 0;                                                                //Resets refi
+            }
+            else
+            {
+                free (new->array);                                                      //Frees useless array struct
+                free (new);                                                             //
+                refi++;
+            }
     }    
 }
 
 static void ordena_datas (array_rate_driver* a,int n)
 {
-
+    
 }
 
 static int* order_array_rate_driver (array_rate_driver* a, int n)                       
@@ -232,9 +234,9 @@ static int* order_array_rate_driver (array_rate_driver* a, int n)
     int i= 0, j= 0, k;
     for (i= 0; i< a->size-1; i++)
         if (a->array[i].rating!= a->array[i+1].rating)
-            return;
-    k= i;                                                                           //Variable k stores the members of the array that have the same classification so we can compare the dates
-    if (!k)                                                                         //
+            break;
+    k= i;                                                                             //Variable k stores the members of the array that have the same classification so we can compare the dates
+    if (!k)                                                                           //
         ordena_datas (a, k);
     for (i= a->size- n- 1; i< n; i++)
         res[j++]= a->array[i].id;
@@ -279,7 +281,7 @@ Array_Rate_Driver init_array_rate_driver (array_ride_driver* a)
         if(!a->array[i].rides)
             ard->array[i].rating = 0.000;
         else    
-            ard->array[i].rating= a->array[i].sum_score/ a->array[i].rides;         //Calculates the average score and assigns it to the rating var.
+            ard->array[i].rating= (double) a->array[i].sum_score/ (double) a->array[i].rides;         //Calculates the average score and assigns it to the rating var.
     }
     return ard;
 }
