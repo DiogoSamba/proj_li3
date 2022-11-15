@@ -159,7 +159,7 @@ static void more_array_ride (array_ride* a)                                     
 
 //--------Array_Rate_Driver
 
-static void merge_sort (rate_driver* a, int size)                               //Aplica 
+static void merge_sort (rate_driver* a, int size)                               //FIXME
 {
     if (size== 1)
         return;
@@ -182,7 +182,7 @@ static void merge_sort (rate_driver* a, int size)                               
     merge_sort (&a[k], j);
 }
 
-static void reduce_array_rate_driver (array_rate_driver* a, int n)              //Returns an array with the unordered top a, a is set between 'n'and 'TARGETRANGE*n'
+static array_rate_driver* reduce_array_rate_driver (array_rate_driver* a, int n)              //Returns an array with the unordered top a, a is set between 'n'and 'TARGETRANGE*n'
 {
     int i, j, refi= 0;                                                              //refi (reference index) Keeps the chosen reference index in case we need to choose another one (j>= n)
     rate_driver ref;
@@ -219,7 +219,8 @@ static void reduce_array_rate_driver (array_rate_driver* a, int n)              
                 free (new);                                                             //
                 refi++;
             }
-    }    
+    }
+    return a;  
 }
 
 static void ordena_datas (array_rate_driver* a,int n)
@@ -235,10 +236,10 @@ static int* order_array_rate_driver (array_rate_driver* a, int n)
     for (i= 0; i< a->size-1; i++)
         if (a->array[i].rating!= a->array[i+1].rating)
             break;
-    k= i;                                                                             //Variable k stores the members of the array that have the same classification so we can compare the dates
-    if (!k)                                                                           //
+    k= i;                                                                           //Variable k stores the members of the array that have the same classification so we can compare the dates
+    if (!k)                                                                         //
         ordena_datas (a, k);
-    for (i= a->size- n- 1; i< n; i++)
+    for (i= a->size-1; i>= a->size-n; i--)
         res[j++]= a->array[i].id;
     return res;
 }
@@ -289,7 +290,7 @@ Array_Rate_Driver init_array_rate_driver (array_ride_driver* a)
 int* top_rated_drivers (Array_Rate_Driver a, int n)                             //Returns an array of the top rated drivers from the best rating(index 0) to the worst (index n-1)
 {
     int* res= malloc (n* sizeof (int));                                         //Result will be assigned here
-    reduce_array_rate_driver (a, n);                                            //Reduces array in size
+    a= reduce_array_rate_driver (a, n);                                            //Reduces array in size
     res= order_array_rate_driver (a, n);                                        //Orders reduced array
     return res;                                                                 
 }
