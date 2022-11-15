@@ -164,22 +164,22 @@ static void merge_sort (rate_driver* a, int size)                               
     if (size== 1)
         return;
     rate_driver ref= a[0];
-    rate_driver maior[size];
-    int j=0, k=0;
+    rate_driver* great= malloc (size* sizeof (rate_driver));
+    int j= 0, k= 0;
     for (int i= 1; i< size; i++)
     {
-        if (a[i].id> ref.id)
-            maior[j++]= a[i];
+        if (a[i].rating> ref.rating)
+            great [j++]= a[i];
         else
             a[k++]= a[i];
-    } 
-    a[k++]= ref;
-    for (int i= 0; i< j; i++)                                                       //Ordena o array segundos as chunks de 'menor' 'ref' e 'maior'.
-    {
-        a[i+k]= maior[i];
     }
-    merge_sort (a, k);
-    merge_sort (&a[k], j);
+    a[k++]= ref;
+    for (int i= k; i< size; i++)
+    {
+        a[i]= great [i-k];
+    }
+    merge_sort (a, k-2);
+    merge_sort (&a[k], size-k);
 }
 
 static array_rate_driver* reduce_array_rate_driver (array_rate_driver* a, int n)              //Returns an array with the unordered top a, a is set between 'n'and 'TARGETRANGE*n'
