@@ -232,7 +232,7 @@ static int* order_array_rate_driver (array_rate_driver* a, int n)
     int i= 0, j= 0, k;
     for (i= 0; i< a->size-1; i++)
         if (a->array[i].rating!= a->array[i+1].rating)
-            return;
+            break;
     k= i;                                                                           //Variable k stores the members of the array that have the same classification so we can compare the dates
     if (!k)                                                                         //
         ordena_datas (a, k);
