@@ -1,6 +1,6 @@
 CC=gcc
 
-CFLAGS=-Wall -Iinclude
+CFLAGS=-Iinclude -Ofast
 
 program: src/main.o src/drivers.o src/users.c src/rides.c src/io.c
 	$(CC) $^ $(LDFLAGS) -o $@

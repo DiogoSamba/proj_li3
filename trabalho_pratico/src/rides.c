@@ -159,7 +159,7 @@ static void more_array_ride (array_ride* a)                                     
 
 //--------Array_Rate_Driver
 
-static void merge_sort (rate_driver* a, int size)                               //FIXME
+static void merge_sort (rate_driver* a, int size)                               
 {
     if (size<= 1)
         return;
