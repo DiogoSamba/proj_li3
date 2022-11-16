@@ -8,9 +8,8 @@
 
 void set_database_driver (Array_Driver a_d)
 {
-    FILE * f_drivers = fopen ("../Dataset/drivers.csv", "r");
+    FILE * f_drivers = fopen ("./Dataset/drivers.csv", "r");
     char * lino = NULL;
-    int c;
     Driver d;
     size_t len;
     getline (&lino, &len, f_drivers);
@@ -52,7 +51,7 @@ void determinar_pay_meth (char pay_meth, User * u)
 
 void set_database_user (Array_User a_u, Node_Array n_a)      
 {
-    FILE * f_users = fopen ("../Dataset/users.csv", "r");
+    FILE * f_users = fopen ("./Dataset/users.csv", "r");
     char * lino = NULL;
     User d;
     size_t len;
@@ -73,7 +72,7 @@ void set_database_user (Array_User a_u, Node_Array n_a)
 
 void set_database_rides (Array_Ride a_r, Node_Array n_a, Array_Driver a_d, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u)      
 {
-    FILE * f_rides = fopen ("../Dataset/rides.csv", "r");
+    FILE * f_rides = fopen ("./Dataset/rides.csv", "r");
     char * lino = NULL, * determinar = calloc(1,30);
     Ride d;
     int idzito;
