@@ -8,7 +8,7 @@ static void print_output_q1d (Driver * d, Ride_Driver * r_d)
 {
     int idade = calcular_idade(d->birth_date); 
     float avaliacao_media;
-    FILE * end_file = fopen("../Resultados/q1.txt", "w");
+    FILE * end_file = fopen("./Resultados/q1.txt", "w");
     if (!r_d->rides)
         avaliacao_media = 0.000;
     else
@@ -21,7 +21,7 @@ static void print_output_q1u (User * u, Ride_User * r_u)
 {
     int idade = calcular_idade(u->birth_date);
     float avaliacao_media;
-    FILE * end_file = fopen("../Resultados/q1.txt", "w");
+    FILE * end_file = fopen("./Resultados/q1.txt", "w");
     if(!r_u->rides)
         avaliacao_media = 0.000;
     else
@@ -56,7 +56,7 @@ static void print_output_q2 (int * array_top_d, Array_Driver a_d, int n, Array_R
     int i, id;
     Driver xpto;
     float avaliacao_media;
-    FILE * end_file = fopen("../Resultados/q2.txt", "w");
+    FILE * end_file = fopen("./Resultados/q2.txt", "w");
     for(i = 0; i < n; i++)
     {
         id = array_top_d[i];
