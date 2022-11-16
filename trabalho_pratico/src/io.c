@@ -8,22 +8,26 @@ static void print_output_q1d (Driver * d, Ride_Driver * r_d)
 {
     int idade = calcular_idade(d->birth_date); 
     float avaliacao_media;
+    FILE * end_file = fopen("../Resultados/q1.txt", "w");
     if (!r_d->rides)
         avaliacao_media = 0.000;
     else
         avaliacao_media = ((float)r_d->sum_score) / ((float)r_d->rides);
-    printf("%s;%c;%d;%.3f;%d;%.3f\n", d->name, d->gender, idade, avaliacao_media, r_d->rides, r_d->cash); 
+    fprintf(end_file, "%s;%c;%d;%.3f;%d;%.3f\n", d->name, d->gender, idade, avaliacao_media, r_d->rides, r_d->cash); 
+    fclose(end_file);
 }
 
 static void print_output_q1u (User * u, Ride_User * r_u)
 {
     int idade = calcular_idade(u->birth_date);
     float avaliacao_media;
+    FILE * end_file = fopen("../Resultados/q1.txt", "w");
     if(!r_u->rides)
         avaliacao_media = 0.000;
     else
         avaliacao_media = ((float)r_u->sum_score) / ((float)r_u->rides);
-    printf("%s;%c;%d;%.3f;%d;%.3f\n", u->name, u->gender, idade, avaliacao_media, r_u->rides, r_u->cash);
+    fprintf(end_file, "%s;%c;%d;%.3f;%d;%.3f\n", u->name, u->gender, idade, avaliacao_media, r_u->rides, r_u->cash);
+    fclose(end_file);
 }
 
 static void q1 (Array_Driver arr_d, Array_User arr_u, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u, Node_Array n_a)
@@ -52,17 +56,19 @@ static void print_output_q2 (int * array_top_d, Array_Driver a_d, int n, Array_R
     int i, id;
     Driver xpto;
     float avaliacao_media;
-    for(i = n-1; i >= 0; i--)
+    FILE * end_file = fopen("../Resultados/q2.txt", "w");
+    for(i = 0; i < n; i++)
     {
         id = array_top_d[i];
-        xpto = get_driver_id(a_d, id);
-        Ride_Driver * r_d = get_ride_driver(a_r_d, id-1);
+        xpto = get_driver_id(a_d, id-1);
+        Ride_Driver * r_d = get_ride_driver(a_r_d, id);
         if (!r_d->rides)
             avaliacao_media = 0.000;
         else
             avaliacao_media = ((float)r_d->sum_score) / ((float)r_d->rides);
-        printf("%d;%s;%.3f\n",id, xpto.name, avaliacao_media);
+        fprintf(end_file, "%d;%s;%.3f\n",id, xpto.name, avaliacao_media);
     }
+    fclose(end_file);
 }
 
 
