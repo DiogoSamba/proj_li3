@@ -17,3 +17,4 @@ src/io.o: src/io.c
 
 clean:
 	rm -f program src/*.o
+
