@@ -23,6 +23,7 @@ void set_database_driver (Array_Driver a_d)
         &d.acc_creat[0], &d.acc_creat[1], &d.acc_creat[2], &d.acc_stat);
         push_driver_Array_Driver (a_d, d);
     }
+    fclose(f_drivers);
 }
 
 void determinar_pay_meth (char pay_meth, User * u)
@@ -68,6 +69,7 @@ void set_database_user (Array_User a_u, Node_Array n_a)
         determinar_pay_meth (determinar[1], &d);
         push_user(d, a_u, n_a);
     }
+    fclose(f_users);
 }
 
 void set_database_rides (Array_Ride a_r, Node_Array n_a, Array_Driver a_d, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u)      
@@ -87,8 +89,8 @@ void set_database_rides (Array_Ride a_r, Node_Array n_a, Array_Driver a_d, Array
         &d.score_d, &d.tip, d.com);
         d.user_id = get_user_id(n_a, determinar);
         push_ride(a_r, a_r_d, a_r_u, &d, a_d);
-        //printf("ola");
     }
+    fclose(f_rides);
 }
 
 void main ()
