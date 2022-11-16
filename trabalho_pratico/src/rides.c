@@ -161,7 +161,7 @@ static void more_array_ride (array_ride* a)                                     
 
 static void merge_sort (rate_driver* a, int size)                               //FIXME
 {
-    if (size== 1)
+    if (size<= 1)
         return;
     rate_driver ref= a[0];
     rate_driver* great= malloc (size* sizeof (rate_driver));
@@ -178,7 +178,7 @@ static void merge_sort (rate_driver* a, int size)                               
     {
         a[i]= great [i-k];
     }
-    merge_sort (a, k-2);
+    merge_sort (a, k-1);
     merge_sort (&a[k], size-k);
 }
 
@@ -203,22 +203,19 @@ static array_rate_driver* reduce_array_rate_driver (array_rate_driver* a, int n)
         for (i= 0, j= 0; i< a->size; i++)
             if (a->array[i].rating> ref.rating)                                     //If a given driver's rating is higher than our reference value we assign it to the 'new' array
                 new->array[j++]= a->array[i];                                       //
-        if (!j)
-            refi++;
+        if (j>=n)                                                                   //Our selection must contain the top 'n' elements
+        {
+            free (a->array);                                                        //Frees 'old' array struct
+            new->size= j;                                                           //Assignement of 'new' array struct to 'a'
+            a=new;                                                                  //
+            refi= 0;                                                                //Resets refi
+        }
         else
-            if (j>=n)                                                                   //Our selection must contain the top 'n' elements
-            {
-                free (a->array);                                                        //Frees 'old' array struct
-                new->size= j;                                                           //Assignement of 'new' array struct to 'a'
-                a=new;                                                                  //
-                refi= 0;                                                                //Resets refi
-            }
-            else
-            {
-                free (new->array);                                                      //Frees useless array struct
-                free (new);                                                             //
-                refi++;
-            }
+        {
+            free (new->array);                                                      //Frees useless array struct
+            free (new);                                                             //
+            refi++;
+        }
     }
     return a;  
 }
