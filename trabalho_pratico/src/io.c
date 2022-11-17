@@ -91,6 +91,7 @@ static void q3()
 
 //--------API
 
+//Estou a tentar explicar o git ao Martim
 
 int calcular_idade (int * idadeX)
 {
