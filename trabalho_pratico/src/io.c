@@ -92,7 +92,7 @@ static void q3()
 //--------API
 
 //Estou a tentar explicar o git ao Martim
-
+//Outro teste..
 int calcular_idade (int * idadeX)
 {
     int ano = IDADE_ANO_STD - idadeX[2];
