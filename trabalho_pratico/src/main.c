@@ -8,9 +8,8 @@
 
 void set_database_driver (Array_Driver a_d)
 {
-    FILE * f_drivers = fopen ("../Dataset/drivers.csv", "r");
+    FILE * f_drivers = fopen ("./Dataset/drivers.csv", "r");
     char * lino = NULL;
-    int c;
     Driver d;
     size_t len;
     getline (&lino, &len, f_drivers);
@@ -24,6 +23,7 @@ void set_database_driver (Array_Driver a_d)
         &d.acc_creat[0], &d.acc_creat[1], &d.acc_creat[2], &d.acc_stat);
         push_driver_Array_Driver (a_d, d);
     }
+    fclose(f_drivers);
 }
 
 void determinar_pay_meth (char pay_meth, User * u)
@@ -52,7 +52,7 @@ void determinar_pay_meth (char pay_meth, User * u)
 
 void set_database_user (Array_User a_u, Node_Array n_a)      
 {
-    FILE * f_users = fopen ("../Dataset/users.csv", "r");
+    FILE * f_users = fopen ("./Dataset/users.csv", "r");
     char * lino = NULL;
     User d;
     size_t len;
@@ -69,11 +69,12 @@ void set_database_user (Array_User a_u, Node_Array n_a)
         determinar_pay_meth (determinar[1], &d);
         push_user(d, a_u, n_a);
     }
+    fclose(f_users);
 }
 
 void set_database_rides (Array_Ride a_r, Node_Array n_a, Array_Driver a_d, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u)      
 {
-    FILE * f_rides = fopen ("../Dataset/rides.csv", "r");
+    FILE * f_rides = fopen ("./Dataset/rides.csv", "r");
     char * lino = NULL, * determinar = calloc(1,30);
     Ride d;
     int idzito;
@@ -88,8 +89,8 @@ void set_database_rides (Array_Ride a_r, Node_Array n_a, Array_Driver a_d, Array
         &d.score_d, &d.tip, d.com);
         d.user_id = get_user_id(n_a, determinar);
         push_ride(a_r, a_r_d, a_r_u, &d, a_d);
-        //printf("ola");
     }
+    fclose(f_rides);
 }
 
 void main ()
@@ -103,6 +104,7 @@ void main ()
     set_database_driver (a_d);
     set_database_user (a_u, n_a);
     set_database_rides (a_r, n_a, a_d, a_r_d, a_r_u);
-    In (a_d, a_u, a_r_d, a_r_u, n_a);
+    Array_Rate_Driver a_rate_d = init_array_rate_driver(a_r_d);
+    In (a_d, a_u, a_r_d, a_r_u, n_a, a_rate_d);
 }
 

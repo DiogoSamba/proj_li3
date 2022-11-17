@@ -1,0 +1,3 @@
+É necessário arranjar a função de init do array de procura de classificações de modo a acomodar o check q se faz ao driver estar ativo ou nao.
+Para isso recomenda-se a implementação de uma função q dado o array de drivers construido ao inicio e o seu id devolve o seu estado.
+Uma alternativa seria criar uma estrutura com exatamente os mesmos parametros de Driver mas que permita uma consulta de todos os seus atributos. Assim não se quebra o encapsulamento e consegue-se obter toda a informação sobre um driver numa struct cómoda.    
