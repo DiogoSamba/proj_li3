@@ -54,8 +54,10 @@ typedef struct ride_user
 
 typedef struct array_ride_driver* Array_Ride_Driver;
 typedef struct array_ride_user* Array_Ride_User;
+//typedef struct array_ride_user* Array_Dist_User;
 typedef struct array_ride* Array_Ride;
 typedef struct array_rate_driver* Array_Rate_Driver;
+
 
 Array_Ride init_array_ride ();
 Array_Ride_Driver init_array_ride_driver ();                                    //Returns a ride_driver array
@@ -65,6 +67,7 @@ void push_ride (Array_Ride a, Array_Ride_Driver a_r_d, Array_Ride_User a_r_u, Ri
 Ride_Driver* get_ride_driver (Array_Ride_Driver a, int id);
 Ride_User* get_ride_user (Array_Ride_User a, int id);
 int* top_rated_drivers (Array_Rate_Driver a, int n);                            //Returns an array of the top rated drivers from the best rating(index 0) to the worst (index n-1)
+//int* most_dist_users (Array_Dist_User a, int d);
 
 /*Rides
     id;date;driver;user;city;distance;score_user;score_driver;tip;comment

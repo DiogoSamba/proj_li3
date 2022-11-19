@@ -55,6 +55,19 @@ typedef struct array_rate_driver
     int size;
     rate_driver* array;
 }array_rate_driver;
+/*
+typedef struct dist_user
+{
+    char user;
+    double dist;
+}dist_user;
+
+typedef struct array_dist_user
+{
+    int size;
+    dist_user* array;
+}array_dist_user;
+*/
 
 //--------Functions--------
 
@@ -302,6 +315,11 @@ Ride_User* get_ride_user (array_ride_user* a, int id)
 {
     return &a->array[id];
 }
+
+//int* most_dist_users (Array_Dist_User a, int)
+//{
+
+//}
 
 void push_ride (array_ride* a, array_ride_driver* a_r_d, array_ride_user* a_r_u, Ride* r, Array_Driver a_d)                                          //Pushes given ride into the ride array
 {

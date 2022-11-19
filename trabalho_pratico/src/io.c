@@ -81,13 +81,41 @@ static void q2 (Array_Rate_Driver a_rate_d, Array_Driver a_d, Array_Ride_Driver 
     print_output_q2(array_top_d, a_d, n, a_r_d);
 }
 
+/* 
+static void print_output_q3 (char * array_top_u, Array_User a_u, int n, Array_Ride_User a_r_u)
+{
+    int i; 
+    char user;
+    int id1;
+    User xpto1;
+    float distancia_viajada;
+    FILE * end_file = fopen("./Resultados/q3.txt", "w1");
+    for (i = 0; i < n; i++)
+    {
+        user = array_top_u[i];
+        id1 = get_user_id(a_u, user);
+        Ride_User * r_u = get_ride_user(a_r_u, user);
+        if (!r_u -> rides)
+            distancia_viajada = 0.000;
+        else 
+            distancia_viajada = ((float)r_u ->sum_dist)/ ((float)r_u -> rides);
+        fprint (end_file, "%s;%s;%.3f\n", user, xpto1.name, distancia_viajada);
+    }
+    fclose(end_file);
 
-static void q3()
+}
+*/
+
+/*
+static void q3(Array_Dist_User a_dist_u, Array_User a_u, Array_Ride_User a_r_u)
 {
     char id [6];
     scanf("%5s", id);
     int n = atoi(id);
+    char * array_top_u = most_dist_users(a_dist_u, n);
+    print_output_q3(array_top_u, a_u, n, a_r_u);
 }
+*/
 
 //--------API
 
@@ -112,7 +140,7 @@ void In (Array_Driver arr_d, Array_User arr_u, Array_Ride_Driver a_r_d, Array_Ri
     {
         case '1' : q1(arr_d, arr_u, a_r_d, a_r_u, n_a); return;
         case '2' : q2(a_rate_d, arr_d, a_r_d); return;
-        case '3' : q3(); return;
+        //case '3' : q3(); return;
         /*
         case '4' : q4(); return;
         case '5' : q5(); return;
